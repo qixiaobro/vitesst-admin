@@ -1,4 +1,12 @@
 <script setup lang="ts">
+import {
+  Check,
+  Delete,
+  Edit,
+  Message,
+  Search,
+  Star,
+} from '@element-plus/icons-vue'
 const name = $ref('')
 
 const router = useRouter()
@@ -9,42 +17,75 @@ const go = () => {
 </script>
 
 <template>
-  <div>
-    <div i-carbon-campsite text-4xl inline-block />
-    <p>
-      <a rel="noreferrer" href="https://github.com/antfu/vitesse-lite" target="_blank">
-        Vitesse Lite
-      </a>
-    </p>
-    <p>
-      <em text-sm op75>Opinionated Vite Starter Template</em>
-    </p>
+  <el-row class="mb-4">
+    <el-button>Default</el-button>
+    <el-button type="primary">
+      Primary
+    </el-button>
+    <el-button type="success">
+      Success
+    </el-button>
+    <el-button type="info">
+      Info
+    </el-button>
+    <el-button type="warning">
+      Warning
+    </el-button>
+    <el-button type="danger">
+      Danger
+    </el-button>
+    <el-button>中文</el-button>
+  </el-row>
 
-    <div py-4 />
+  <el-row class="mb-4">
+    <el-button plain>
+      Plain
+    </el-button>
+    <el-button type="primary" plain>
+      Primary
+    </el-button>
+    <el-button type="success" plain>
+      Success
+    </el-button>
+    <el-button type="info" plain>
+      Info
+    </el-button>
+    <el-button type="warning" plain>
+      Warning
+    </el-button>
+    <el-button type="danger" plain>
+      Danger
+    </el-button>
+  </el-row>
 
-    <input
-      id="input"
-      v-model="name"
-      placeholder="What's your name?"
-      type="text"
-      autocomplete="false"
-      p="x-4 y-2"
-      w="250px"
-      text="center"
-      bg="transparent"
-      border="~ rounded gray-200 dark:gray-700"
-      outline="none active:none"
-      @keydown.enter="go"
-    >
+  <el-row class="mb-4">
+    <el-button round>
+      Round
+    </el-button>
+    <el-button type="primary" round>
+      Primary
+    </el-button>
+    <el-button type="success" round>
+      Success
+    </el-button>
+    <el-button type="info" round>
+      Info
+    </el-button>
+    <el-button type="warning" round>
+      Warning
+    </el-button>
+    <el-button type="danger" round>
+      Danger
+    </el-button>
+  </el-row>
 
-    <div>
-      <button
-        class="m-3 text-sm btn"
-        :disabled="!name"
-        @click="go"
-      >
-        Go
-      </button>
-    </div>
-  </div>
+  <el-row>
+    <el-button :icon="Search" circle />
+    <el-button type="primary" :icon="Edit" circle />
+    <el-button type="success" :icon="Check" circle />
+    <el-button type="info" :icon="Message" circle />
+    <el-button type="warning" :icon="Star" circle />
+    <el-button type="danger" :icon="Delete" circle />
+  </el-row>
 </template>
+
