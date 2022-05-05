@@ -8,14 +8,19 @@ import { isDark, toggleDark } from '~/composables'
       <div v-if="isDark" i-carbon-moon />
       <div v-else i-carbon-sun />
     </button>
-
-    <a
-      class="icon-btn"
-      i-carbon-logo-github
+    <button icon-btn border-none bg-transparent>
+      <div i-carbon-thumbs-up />
+    </button>
+    <button icon-btn border-none bg-transparent>
+      <div i-carbon:thunderstorm />
+    </button>
+    <!-- <a
+      i-carbon-thumbs-up
+      gray-700
       rel="noreferrer"
       href="https://github.com/antfu/vitesse-lite"
       target="_blank"
       title="GitHub"
-    />
+    /> -->
   </nav>
 </template>
