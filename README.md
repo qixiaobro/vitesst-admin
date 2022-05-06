@@ -1,9 +1,7 @@
 
 <h5 align='center'>
-<b>基于 <a href="https://github.com/antfu/vitesse">Vitesse-lite</a> 封装的起手式模版（Element Plus、Axios）</b>
+<b>基于 <a href="https://github.com/antfu/vitesse">Vitesse-lite</a> 封装的起手式模版（Element Plus、Axios、Pinia）</b>
 </h5>
-
-<br>
 
 ## 特性
 
