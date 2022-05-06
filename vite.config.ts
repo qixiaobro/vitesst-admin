@@ -1,9 +1,16 @@
+/*
+ * @Author: qixiaobro
+ * @Date: 2022-05-05 15:51:20
+ * @LastEditors: qixiaobro
+ * @LastEditTime: 2022-05-06 10:24:30
+ * @Description: vite.config.ts
+ * Copyright (c) 2022 by qixiaobro, All Rights Reserved.
+ */
 /// <reference types="vitest" />
 
 import path from 'path'
 import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
-import Pages from 'vite-plugin-pages'
 import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Unocss from 'unocss/vite'
@@ -19,9 +26,6 @@ export default defineConfig({
     Vue({
       reactivityTransform: true,
     }),
-
-    // https://github.com/hannoeru/vite-plugin-pages
-    Pages(),
 
     // https://github.com/antfu/unplugin-auto-import
     AutoImport({
