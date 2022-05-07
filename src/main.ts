@@ -2,7 +2,7 @@
  * @Author: qixiaobro
  * @Date: 2022-05-05 15:51:20
  * @LastEditors: qixiaobro
- * @LastEditTime: 2022-05-06 10:22:39
+ * @LastEditTime: 2022-05-07 10:30:03
  * @Description: main.ts
  * Copyright (c) 2022 by qixiaobro, All Rights Reserved.
  */
@@ -16,4 +16,5 @@ import 'uno.css'
 const app = createApp(App)
 
 app.use(router)
+app.use(createPinia())
 app.mount('#app')
