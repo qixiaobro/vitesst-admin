@@ -1,18 +1,13 @@
 <template>
-	<div class="menu" :style="{ width: isCollapse ? '65px' : '250px' }">
+	<div class="menu" :style="{ width: isCollapse ? '65px' : '220px' }" border-r h-100vh border-gray-200 transition-all>
 		<Logo :isCollapse="isCollapse"></Logo>
-		<el-menu
-			:default-active="activeMenu"
-			:router="true"
-			:collapse="isCollapse"
-			:collapse-transition="false"
-			:unique-opened="true"
-			background-color="#20222a"
-			text-color="#bdbdc0"
-			active-text-color="#fff"
-		>
-			<SubItem :menuList="menuList"></SubItem>
-		</el-menu>
+		<div class="menu-box">
+			<el-menu :default-active="activeMenu" :router="true" :collapse="isCollapse" :collapse-transition="false"
+				:unique-opened="true" active-text-color="#409EFF" text-color="#6B7280">
+				<SubItem :menuList="menuList"></SubItem>
+			</el-menu>
+		</div>
+
 	</div>
 </template>
 
@@ -51,4 +46,8 @@ listeningWindow();
 
 <style scoped lang="scss">
 @import "./index.scss";
+
+.el-menu {
+	border-right: none;
+}
 </style>

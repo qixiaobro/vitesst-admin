@@ -1,30 +1,23 @@
 <template>
-	<div class="header">
-		<div class="flex items-center">
-			<el-icon class="collapse-icon" @click="menuStore.setCollapse()">
-				<component :is="isCollapse ? 'expand' : 'fold'"></component>
-			</el-icon>
-			<el-breadcrumb :separator-icon="ArrowRight">
+	<div h-60px px-15px flex items-center justify-between border-b border-gray-200>
+		<div flex items-center>
+			<div text-gray-400 p-4px flex items-center justify-center bg-gray-100 rounded-sm cursor-pointer
+				hover:text-blue-400 hover:bg-gray-200 mr-5 @click="menuStore.setCollapse()">
+				<el-icon class="collapse-icon" text-16px>
+					<component :is="isCollapse ? 'expand' : 'fold'"></component>
+				</el-icon>
+			</div>
+			<el-breadcrumb>
 				<el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
 				<el-breadcrumb-item>超级表格</el-breadcrumb-item>
 			</el-breadcrumb>
 		</div>
-		<div class="header-ri flex items-center">
-			<!-- Component size -->
-			<el-tooltip effect="dark" :content="'组件大小'" placement="bottom">
-				<i :class="'iconfont icon-contentright'" class="icon-style" @click=""></i>
-			</el-tooltip>
-			<!-- Full screen -->
-			<el-tooltip effect="dark" :content="'全屏'" placement="bottom">
-				<i :class="'iconfont icon-fangda1'" class="icon-style" @click=""></i>
-			</el-tooltip>
+		<div flex items-center>
 			<!-- username -->
-			<span class="username">Geeker</span>
+			<span text-14px text-gray-500 mr-2>Geeker</span>
 			<!-- usercenter -->
 			<el-dropdown trigger="click">
-				<div class="avatar">
-					<div w-40px h-40px i-carbon-user-avatar-filled />
-				</div>
+				<div w-40px h-40px i-carbon-user-avatar-filled />
 				<template #dropdown>
 					<el-dropdown-menu>
 						<el-dropdown-item @click.native="openDialog('infoRef')">个人资料</el-dropdown-item>
@@ -42,7 +35,6 @@
 </template>
 
 <script setup lang="ts">
-import { ArrowRight } from "@element-plus/icons-vue";
 import { MenuStore } from "~/store/modules/menu";
 import InfoDialog from "./components/infoDialog.vue";
 import PasswordDialog from "./components/passwordDialog.vue";
@@ -81,7 +73,3 @@ const openDialog = (refName: string) => {
 	passwordRef.value?.openDialog();
 };
 </script>
-
-<style scoped lang="scss">
-@import "./index.scss";
-</style>
