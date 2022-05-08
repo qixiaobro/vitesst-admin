@@ -12,7 +12,7 @@ export const TabsStore = defineStore({
 	id: "TabsState",
 	state: (): TabsState => ({
 		tabsMenuValue: "/home",
-		tabsMenuList: [{ title: "首页", path: "/home", icon: "home-filled", close: false }]
+		tabsMenuList: [{ title: "首页", path: "/home", icon: "home-filled",meta:{}, close: false }]
 	}),
 	getters: {},
 	actions: {
@@ -24,7 +24,8 @@ export const TabsStore = defineStore({
 			const tabInfo: Menu.MenuOptions = {
 				title: tabItem.title,
 				path: tabItem.path,
-				close: tabItem.close
+				close: tabItem.close,
+				meta:{}
 			};
 			let flag = false;
 			this.tabsMenuList.forEach(item => {

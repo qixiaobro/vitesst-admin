@@ -1,53 +1,58 @@
-<template>
-	<div class="menu" :style="{ width: isCollapse ? '65px' : '220px' }" border-r h-100vh border-gray-200 transition-all>
-		<Logo :isCollapse="isCollapse"></Logo>
-		<div class="menu-box">
-			<el-menu :default-active="activeMenu" :router="true" :collapse="isCollapse" :collapse-transition="false"
-				:unique-opened="true" active-text-color="#409EFF" text-color="#6B7280">
-				<SubItem :menuList="menuList"></SubItem>
-			</el-menu>
-		</div>
-
-	</div>
-</template>
-
 <script setup lang="ts">
-import { MenuStore } from "~/store/modules/menu";
-import Logo from "./components/Logo.vue";
-import SubItem from "./components/SubItem.vue";
-import menuListJson from "./json/menu.json";
+import Logo from './components/Logo.vue'
+import SubItem from './components/SubItem.vue'
+import { MenuStore } from '~/store/modules/menu'
+// import menuListJson from "./json/menu.json";
 
-const route = useRoute();
-const menuStore = MenuStore();
+const route = useRoute()
+const menuStore = MenuStore()
 
 // set menuList
-menuStore.setMenuList(menuListJson);
+// menuStore.setMenuList(menuListJson);
+const routes = useRouter().options.routes as unknown as Menu.MenuOptions[]
+menuStore.setMenuList(routes)
 
-const activeMenu = computed((): string => route.path);
-const isCollapse = computed((): boolean => menuStore.isCollapse);
+const activeMenu = computed((): string => route.path)
+const isCollapse = computed((): boolean => menuStore.isCollapse)
 // const menuList = reactive<Menu.MenuOptions[]>(menuListJson);
-const menuList = computed((): Menu.MenuOptions[] => menuStore.menuList);
+const menuList = computed((): Menu.MenuOptions[] => menuStore.menuList)
 
-const screenWidth = ref<number>(0);
-const screenHeight = ref<number>(0);
-//监听窗口大小
+const screenWidth = ref<number>(0)
+const screenHeight = ref<number>(0)
+// 监听窗口大小
 const listeningWindow = () => {
-	window.onresize = () => {
-		return (() => {
-			screenWidth.value = document.body.clientWidth;
-			screenHeight.value = document.body.clientHeight;
-			if (isCollapse.value === false && screenWidth.value < 1200) menuStore.setCollapse();
-			if (isCollapse.value === true && screenWidth.value > 1200) menuStore.setCollapse();
-		})();
-	};
-};
-listeningWindow();
+  window.onresize = () => {
+    return (() => {
+      screenWidth.value = document.body.clientWidth
+      screenHeight.value = document.body.clientHeight
+      if (isCollapse.value === false && screenWidth.value < 1200)
+        menuStore.setCollapse()
+      if (isCollapse.value === true && screenWidth.value > 1200)
+        menuStore.setCollapse()
+    })()
+  }
+}
+listeningWindow()
 </script>
+
+<template>
+  <div class="menu" :style="{ width: isCollapse ? '65px' : '220px' }" border-r h-100vh border-gray-200 transition-all>
+    <Logo :is-collapse="isCollapse" />
+    <div class="menu-box">
+      <el-menu
+        :default-active="activeMenu" :router="true" :collapse="isCollapse" :collapse-transition="false"
+        :unique-opened="true" active-text-color="#409EFF" text-color="#6B7280"
+      >
+        <SubItem :menu-list="menuList" />
+      </el-menu>
+    </div>
+  </div>
+</template>
 
 <style scoped lang="scss">
 @import "./index.scss";
 
 .el-menu {
-	border-right: none;
+border-right: none;
 }
 </style>
