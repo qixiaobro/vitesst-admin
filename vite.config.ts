@@ -7,6 +7,7 @@ import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Unocss from 'unocss/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import viteCompression from 'vite-plugin-compression';
 
 export default defineConfig({
   // 别名
@@ -48,6 +49,16 @@ export default defineConfig({
     // https://github.com/antfu/unocss
     // see unocss.config.ts for config
     Unocss(),
+
+    //https://github.com/vbenjs/vite-plugin-compression/blob/main/README.zh_CN.md
+    //gzip
+    viteCompression({
+      verbose: true,
+			disable: false,
+			threshold: 10240,
+			algorithm: "gzip",
+			ext: ".gz"
+    })
   ],
 
   // 测试 https://github.com/vitest-dev/vitest
@@ -61,7 +72,7 @@ export default defineConfig({
       // 全局引入了 scss 的文件
       scss: {
         additionalData: `
-        @import ~/styles/variables.scss";
+        @import "~/styles/variables.scss";
       `,
         javascriptEnabled: true,
       },
@@ -90,6 +101,7 @@ export default defineConfig({
     // 消除打包大小超过500kb警告
     chunkSizeWarningLimit: 2000,
     // 在生产环境移除console.log
+    minify: "terser",
     terserOptions: {
       compress: {
         drop_console: true,

@@ -10,10 +10,12 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^1.1.4",
     "@vueuse/core": "^8.3.1",
     "axios": "^0.27.2",
     "element-plus": "^2.1.11",
     "pinia": "^2.0.14",
+    "pinia-plugin-persist": "^1.0.0",
     "vue": "^3.2.33",
     "vue-router": "^4.0.14"
   },
@@ -32,6 +34,7 @@
     "unplugin-auto-import": "^0.7.1",
     "unplugin-vue-components": "^0.19.3",
     "vite": "^2.9.7",
+    "vite-plugin-compression": "^0.5.1",
     "vitest": "^0.10.1",
     "vue-tsc": "^0.34.11"
   },

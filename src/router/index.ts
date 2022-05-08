@@ -2,7 +2,7 @@
  * @Author: qixiaobro
  * @Date: 2022-05-06 09:40:50
  * @LastEditors: qixiaobro
- * @LastEditTime: 2022-05-06 10:16:28
+ * @LastEditTime: 2022-05-07 22:47:14
  * @Description: 路由根文件
  * Copyright (c) 2022 by qixiaobro, All Rights Reserved.
  */
@@ -24,6 +24,8 @@ const routes: Array<RouteRecordRaw> = [
 const router: Router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes,
+  // 切换页面，滚动到最顶部
+	scrollBehavior: () => ({ left: 0, top: 0 })
 })
 
 export default router
