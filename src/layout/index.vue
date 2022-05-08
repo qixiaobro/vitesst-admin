@@ -8,7 +8,7 @@
 				<Header></Header>
 				<Tabs></Tabs>
 			</el-header>
-			<el-main>
+			<el-main bg-gray-100>
 				<section class="main-box">
 					<router-view v-slot="{ Component, route }">
 						<transition appear name="fade-transform" mode="out-in">
@@ -20,9 +20,6 @@
 					</router-view>
 				</section>
 			</el-main>
-			<el-footer>
-				<Footer></Footer>
-			</el-footer>
 		</el-container>
 	</el-container>
 </template>
@@ -31,7 +28,6 @@
 import Menu from "./Menu/index.vue";
 import Header from "./Header/index.vue";
 import Tabs from "./Tabs/index.vue";
-import Footer from "./Footer/index.vue";
 </script>
 
 <style scoped lang="scss">
