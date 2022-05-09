@@ -1,22 +1,16 @@
 <script setup lang="ts">
 import Logo from './components/Logo.vue'
 import SubItem from './components/SubItem.vue'
-import { MenuStore } from '~/store/modules/menu'
-// import menuListJson from "./json/menu.json";
+import menuListJson from './json/menu.json'
+import { UseMenuStore } from '~/store/modules/menu'
 
 const route = useRoute()
-const menuStore = MenuStore()
+const menuStore = UseMenuStore()
 
-// set menuList
-// menuStore.setMenuList(menuListJson);
-const routes = useRouter().options.routes as unknown as Menu.MenuOptions[]
-menuStore.setMenuList(routes)
-
+menuStore.setMenuList(menuListJson)
 const activeMenu = computed((): string => route.path)
 const isCollapse = computed((): boolean => menuStore.isCollapse)
-// const menuList = reactive<Menu.MenuOptions[]>(menuListJson);
 const menuList = computed((): Menu.MenuOptions[] => menuStore.menuList)
-
 const screenWidth = ref<number>(0)
 const screenHeight = ref<number>(0)
 // 监听窗口大小
@@ -53,6 +47,6 @@ listeningWindow()
 @import "./index.scss";
 
 .el-menu {
-border-right: none;
+  border-right: none;
 }
 </style>

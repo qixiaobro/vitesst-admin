@@ -19,6 +19,7 @@ specifiers:
   typescript: ^4.6.4
   unocss: ^0.32.9
   unplugin-auto-import: ^0.7.1
+  unplugin-icons: ^0.14.3
   unplugin-vue-components: ^0.19.3
   vite: ^2.9.7
   vite-plugin-compression: ^0.5.1
@@ -50,6 +51,7 @@ devDependencies:
   typescript: 4.6.4
   unocss: 0.32.9_vite@2.9.7
   unplugin-auto-import: 0.7.1_ughpjznvtpymuf7ubf7g3kiiem
+  unplugin-icons: 0.14.3_vite@2.9.7
   unplugin-vue-components: 0.19.3_vite@2.9.7+vue@3.2.33
   vite: 2.9.7
   vite-plugin-compression: 0.5.1_vite@2.9.7
@@ -3653,6 +3655,38 @@ packages:
       - webpack
     dev: true
 
+  /unplugin-icons/0.14.3_vite@2.9.7:
+    resolution: {integrity: sha512-PyyNMACpZ/EAiG3B6K1wPGZ151VGdlHIEx8/utgP546yVmPpV/xC1k1V2eEebf71fGm3WD6gzPrERNsbMgIVgg==}
+    peerDependencies:
+      '@svgr/core': '>=5.5.0'
+      '@vue/compiler-sfc': ^3.0.2
+      vue-template-compiler: ^2.6.12
+      vue-template-es2015-compiler: ^1.9.0
+    peerDependenciesMeta:
+      '@svgr/core':
+        optional: true
+      '@vue/compiler-sfc':
+        optional: true
+      vue-template-compiler:
+        optional: true
+      vue-template-es2015-compiler:
+        optional: true
+    dependencies:
+      '@antfu/install-pkg': 0.1.0
+      '@antfu/utils': 0.5.1
+      '@iconify/utils': 1.0.32
+      debug: 4.3.4
+      kolorist: 1.5.1
+      local-pkg: 0.4.1
+      unplugin: 0.6.3_vite@2.9.7
+    transitivePeerDependencies:
+      - esbuild
+      - rollup
+      - supports-color
+      - vite
+      - webpack
+    dev: true
+
   /unplugin-vue-components/0.19.3_vite@2.9.7+vue@3.2.33:
     resolution: {integrity: sha512-z/kpYJnqrJuWglDNs7fy0YRHr41oLc07y2TkP3by6DqPb1GG9xGC9SFigeFwd4J7GVTqyFVsnjoeup7uK7I2dA==}
     engines: {node: '>=14'}
@@ -3687,6 +3721,29 @@ packages:
 
   /unplugin/0.6.1_vite@2.9.7:
     resolution: {integrity: sha512-cQqRCgQ2v/Q4fPIWNVZ6sNIDdl5v8JXOnlsUOsGzT4fblTONoPWaytiYSpu5qJ9lvSDZYAQN6BRVo3XQoZMfUQ==}
+    peerDependencies:
+      esbuild: '>=0.13'
+      rollup: ^2.50.0
+      vite: ^2.3.0
+      webpack: 4 || 5
+    peerDependenciesMeta:
+      esbuild:
+        optional: true
+      rollup:
+        optional: true
+      vite:
+        optional: true
+      webpack:
+        optional: true
+    dependencies:
+      chokidar: 3.5.3
+      vite: 2.9.7
+      webpack-sources: 3.2.3
+      webpack-virtual-modules: 0.4.3
+    dev: true
+
+  /unplugin/0.6.3_vite@2.9.7:
+    resolution: {integrity: sha512-CoW88FQfCW/yabVc4bLrjikN9HC8dEvMU4O7B6K2jsYMPK0l6iAnd9dpJwqGcmXJKRCU9vwSsy653qg+RK0G6A==}
     peerDependencies:
       esbuild: '>=0.13'
       rollup: ^2.50.0

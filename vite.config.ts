@@ -7,7 +7,9 @@ import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Unocss from 'unocss/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-import viteCompression from 'vite-plugin-compression';
+import viteCompression from 'vite-plugin-compression'
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
 
 export default defineConfig({
   // 别名
@@ -37,28 +39,43 @@ export default defineConfig({
         },
       ],
       dts: true,
-      resolvers: [ElementPlusResolver()],
+      resolvers: [
+        ElementPlusResolver(),
+        // 自动导入图标组件
+        IconsResolver({
+          prefix: 'Icon',
+        })],
     }),
 
     // https://github.com/antfu/vite-plugin-components
     Components({
       dts: true,
-      resolvers: [ElementPlusResolver()],
+      resolvers: [
+        ElementPlusResolver(),
+        // 自动注册图标组件
+        IconsResolver({
+          enabledCollections: ['ep'],
+        }),
+      ],
+    }),
+
+    Icons({
+      autoInstall: true,
     }),
 
     // https://github.com/antfu/unocss
     // see unocss.config.ts for config
     Unocss(),
 
-    //https://github.com/vbenjs/vite-plugin-compression/blob/main/README.zh_CN.md
-    //gzip
+    // https://github.com/vbenjs/vite-plugin-compression/blob/main/README.zh_CN.md
+    // gzip
     viteCompression({
       verbose: true,
-			disable: false,
-			threshold: 10240,
-			algorithm: "gzip",
-			ext: ".gz"
-    })
+      disable: false,
+      threshold: 10240,
+      algorithm: 'gzip',
+      ext: '.gz',
+    }),
   ],
 
   // 测试 https://github.com/vitest-dev/vitest
@@ -101,7 +118,7 @@ export default defineConfig({
     // 消除打包大小超过500kb警告
     chunkSizeWarningLimit: 2000,
     // 在生产环境移除console.log
-    minify: "terser",
+    minify: 'terser',
     terserOptions: {
       compress: {
         drop_console: true,
