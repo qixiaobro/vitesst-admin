@@ -7,6 +7,6 @@ body,
 }
 
 .el-menu{
-  --el-menu-item-height: 40px;
-  --el-menu-hover-bg-color:#f2f3f5
+  --el-menu-item-height: 40px !important;
+  --el-menu-hover-bg-color:#f2f3f5 !important;
 }

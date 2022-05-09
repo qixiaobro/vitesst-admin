@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import InfoDialog from './components/infoDialog.vue'
 import PasswordDialog from './components/passwordDialog.vue'
-import { MenuStore } from '~/store/modules/menu'
+import Breadcrumb from './components/Breadcrumb.vue'
+import { UseMenuStore } from '~/store/modules/menu'
 
-const menuStore = MenuStore()
+const menuStore = UseMenuStore()
 const isCollapse = computed((): boolean => menuStore.isCollapse)
 
 // logout
@@ -48,12 +49,7 @@ const openDialog = (refName: string) => {
           <component :is="isCollapse ? 'expand' : 'fold'" />
         </el-icon>
       </div>
-      <el-breadcrumb>
-        <el-breadcrumb-item :to="{ path: '/home' }">
-          首页
-        </el-breadcrumb-item>
-        <el-breadcrumb-item>超级表格</el-breadcrumb-item>
-      </el-breadcrumb>
+      <Breadcrumb />
     </div>
     <div flex items-center>
       <!-- username -->

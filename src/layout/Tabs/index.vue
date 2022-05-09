@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { TabsPaneContext } from 'element-plus'
-import { TabsStore } from '~/store/modules/tabs'
+import { UseTabsStore } from '~/store/modules/tabs'
 
-const tabStore = TabsStore()
+const tabStore = UseTabsStore()
 const tabsMenuList = computed(() => tabStore.tabsMenuList)
 const tabsMenuValue = computed({
   get: () => {
@@ -19,11 +19,10 @@ const router = useRouter()
 watch(
   () => route.path,
   () => {
-    const params = {
+    const params: Menu.MenuOptions = {
       title: route.meta.title as string,
       path: route.path,
       close: true,
-      meta: route.meta,
     }
     // debugger
     tabStore.addTabs(params)

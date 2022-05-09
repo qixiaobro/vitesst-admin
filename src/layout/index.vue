@@ -16,13 +16,11 @@ import Tabs from './Tabs/index.vue'
       </el-header>
       <el-main bg-gray-100>
         <section class="main-box">
-          <router-view v-slot="{ Component, route }">
-            <transition appear name="fade-transform" mode="out-in">
-              <keep-alive v-if="route.meta.keepAlive">
-                <component :is="Component" :key="route.path" />
-              </keep-alive>
-              <component :is="Component" v-else :key="route.path" />
-            </transition>
+          <router-view v-slot="{ Component }">
+            <keep-alive>
+              <component :is="Component" v-if="$route.meta.keepAlive" :key="$route.name" />
+            </keep-alive>
+            <component :is="Component" v-if="!$route.meta.keepAlive" :key="$route.name" />
           </router-view>
         </section>
       </el-main>
