@@ -1,5 +1,5 @@
 <template>
-  <main font-sans text="center gray-700 dark:gray-200">
+  <main font-sans text="center gray-700">
     <router-view />
   </main>
 </template>
