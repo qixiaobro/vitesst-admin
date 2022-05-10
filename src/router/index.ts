@@ -48,9 +48,39 @@ const router = createRouter({
   scrollBehavior: () => ({ left: 0, top: 0 }),
 })
 
-router.beforeEach((to, from, next) => {
+const whiteList = ['/login'] // 白名单
+
+router.beforeEach(async (to, from, next) => {
+  // start progress bar
   NProgress.start()
-  next()
+
+  // set page title
+  document.title = to.meta.title as unknown as string
+
+  // determine whether the user has logged in
+  const hasToken = sessionStorage.getItem('token')
+  if (hasToken) { // 有token
+    if (to.path === '/login') {
+      // 如果是进入登录页面 则重定向到首页
+      next({ path: '/' })
+      NProgress.done() // 页面导航结束
+    }
+    else {
+      next()
+    }
+  }
+  else {
+    // 没有token
+    if (whiteList.includes(to.path)) {
+      // 白名单页直接进入
+      next()
+    }
+    else {
+      // 其它页面没有权限重定向到登录页
+      next('/login')
+      NProgress.done()
+    }
+  }
 })
 
 router.afterEach(() => {

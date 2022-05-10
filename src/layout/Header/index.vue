@@ -6,6 +6,7 @@ import { UseMenuStore } from '~/store/modules/menu'
 
 const menuStore = UseMenuStore()
 const isCollapse = computed((): boolean => menuStore.isCollapse)
+const router = useRouter()
 
 // logout
 const logout = () => {
@@ -14,11 +15,12 @@ const logout = () => {
     cancelButtonText: 'Cancel',
     type: 'warning',
   }).then(() => {
-    // router.push({ name: "login" });
+    sessionStorage.removeItem('token')
     ElMessage({
       type: 'success',
       message: '退出登录成功！',
     })
+    router.push('/login')
   })
 }
 

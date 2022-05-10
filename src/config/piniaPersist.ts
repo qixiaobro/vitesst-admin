@@ -7,8 +7,8 @@ const piniaPersist = (key: string) => {
     strategies: [
       {
         key,
-        storage: localStorage,
-        // storage: sessionStorage
+        // storage: localStorage,
+        storage: sessionStorage,
       },
     ],
   }

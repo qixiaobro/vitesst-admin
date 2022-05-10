@@ -4,11 +4,11 @@ import Layout from '~/layout/index.vue'
 // 首页模块
 const homeRouter: Array<RouteRecordRaw> = [
   {
-    path: '/home',
+    path: '/',
     component: Layout,
     children: [
       {
-        path: 'index',
+        path: '',
         name: 'Home',
         component: () => import('~/pages/home/Home.vue'),
         meta: {

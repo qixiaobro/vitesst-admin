@@ -3,7 +3,7 @@
     "id": "1",
     "icon": "home-filled",
     "title": "首页",
-    "path": "/home/index"
+    "path": "/"
   },
   {
     "id": "2",

@@ -2,7 +2,7 @@ import type { RouteRecordRaw } from 'vue-router'
 import Layout from '~/layout/index.vue'
 
 // 申报模块
-const homeRouter: Array<RouteRecordRaw> = [
+const declareRouter: Array<RouteRecordRaw> = [
   {
     path: '/declare',
     component: Layout,
@@ -33,4 +33,4 @@ const homeRouter: Array<RouteRecordRaw> = [
   },
 ]
 
-export default homeRouter
+export default declareRouter
