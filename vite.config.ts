@@ -104,10 +104,10 @@ export default defineConfig({
     cors: true,
     // 代理
     proxy: {
-      '/api': {
-        target: 'http://localhost:3000',
+      '/adminapi': {
+        target: 'https://devlmcs.dp123.com/',
         changeOrigin: true,
-        rewrite: path => path.replace('/api/', '/'),
+        // rewrite: path => path.replace('/api/', '/'),
       },
     },
   },

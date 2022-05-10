@@ -45,7 +45,7 @@ const removeTab = (activeTabPath: string) => {
 
 // Close Current
 const closeCurrentTab = () => {
-  if (tabStore.tabsMenuValue === '/home')
+  if (tabStore.tabsMenuValue === '/')
     return
   tabStore.removeTabs(tabStore.tabsMenuValue)
 }

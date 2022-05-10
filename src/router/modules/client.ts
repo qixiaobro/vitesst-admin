@@ -2,7 +2,7 @@ import type { RouteRecordRaw } from 'vue-router'
 import Layout from '~/layout/index.vue'
 
 // 客户模块
-const homeRouter: Array<RouteRecordRaw> = [
+const clientRouter: Array<RouteRecordRaw> = [
   {
     path: '/client',
     component: Layout,
@@ -23,4 +23,4 @@ const homeRouter: Array<RouteRecordRaw> = [
   },
 ]
 
-export default homeRouter
+export default clientRouter

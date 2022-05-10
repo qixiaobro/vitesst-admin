@@ -34,11 +34,17 @@ axiosInstance.interceptors.request.use(
 // 响应拦截器
 axiosInstance.interceptors.response.use(
   (response: AxiosResponse) => {
-    if (response.status === 200)
-      return response.data
+    if (response.status === 200) {
+      if (response.request.responseType === 'blob')
+        return response.data
+      else if (response.data.status === 200)
+        return Promise.resolve(response.data)
+      else
+        return Promise.reject(response.data)
+    }
 
     ElMessage.info(JSON.stringify(response.status))
-    return response
+    return Promise.reject(response)
   },
   (error: AxiosError) => {
     const { response } = error
@@ -54,9 +60,16 @@ const service = {
   get<T = any>(url: string, data?: object): Promise<T> {
     return axiosInstance.get(url, { params: data })
   },
+  getBlob<T = any>(url: string, data?: object): Promise<T> {
+    return axiosInstance.get(url, { params: data, responseType: 'blob' })
+  },
 
-  post<T = any>(url: string, data?: object): Promise<T> {
-    return axiosInstance.post(url, data)
+  // post<T = any>(url: string, data?: object): Promise<T> {
+  //   return axiosInstance.post(url, data)
+  // },
+
+  post<T>(url: string, params?: object, _object = {}): Promise<T> {
+    return axiosInstance.post(url, params, _object)
   },
 
   put<T = any>(url: string, data?: object): Promise<T> {
