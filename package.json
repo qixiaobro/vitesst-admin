@@ -17,6 +17,7 @@
     "nprogress": "^0.2.0",
     "pinia": "^2.0.14",
     "pinia-plugin-persist": "^1.0.0",
+    "sass": "^1.51.0",
     "vue": "^3.2.33",
     "vue-router": "^4.0.14"
   },
