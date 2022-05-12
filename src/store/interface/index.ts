@@ -13,3 +13,13 @@ export interface TabsState {
 export interface AuthButtonsState {
   authorButtons: Record<string, any>
 }
+
+/* UserStore */
+export namespace UserState {
+  export interface UserInfo {
+    id: string
+    account: string
+    head_pic: string
+    roles: string
+  }
+}
