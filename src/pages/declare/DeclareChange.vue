@@ -2,7 +2,7 @@
  * @Author: qixiaobro
  * @Date: 2022-05-08 22:16:11
  * @LastEditors: qixiaobro
- * @LastEditTime: 2022-05-12 10:37:38
+ * @LastEditTime: 2022-05-12 11:37:31
  * @Description: 用户列表
  * Copyright (c) 2022 by qixiaobro, All Rights Reserved.
 -->
@@ -11,7 +11,7 @@ import type { FormInstance } from 'element-plus/lib/components/form'
 
 const tableHeight = ref('auto')
 onMounted(() => {
-  tableHeight.value = `${window.innerHeight - 430}px`
+  tableHeight.value = `${window.innerHeight - 290}px`
 })
 const options = [
   {
@@ -34,7 +34,6 @@ const options = [
 const queryForm = reactive({
   user: '',
   region: '',
-  status: '',
   date: '',
 })
 
@@ -246,18 +245,7 @@ const handleCurrentChange = (val: number) => {
 
 </script>
 <template>
-  <el-row :gutter="20">
-    <el-col :span="8">
-      <DataCard color="green-600" title="公司总数（家）" num="30000" icon="i-carbon:connection-receive" />
-    </el-col>
-    <el-col :span="8">
-      <DataCard color="blue-600" title="申报公司数（家）" num="30000" icon="i-carbon:data-reference" />
-    </el-col>
-    <el-col :span="8">
-      <DataCard color="red-600" title="今日新增公司（家）" num="30000" icon="i-carbon:categories" />
-    </el-col>
-  </el-row>
-  <div class="w-full rounded shadow-xl bg-white mt-5 p-5 box-border">
+  <div class="w-full rounded shadow-xl bg-white p-5 box-border">
     <!--搜索表单-->
     <el-form ref="queryFormRef" :inline="true" :model="queryForm">
       <el-form-item label="搜索" prop="region" style="margin-right:0">
@@ -268,13 +256,7 @@ const handleCurrentChange = (val: number) => {
       <el-form-item prop="user">
         <el-input v-model="queryForm.user" style="width:120px;margin-left:-5px" placeholder="请输入查询内容" clearable />
       </el-form-item>
-      <el-form-item label="申报状态" prop="status">
-        <el-select v-model="queryForm.status" clearable>
-          <el-option label="申报中" value="0" />
-          <el-option label="未申报" value="1" />
-        </el-select>
-      </el-form-item>
-      <el-form-item label="添加时间" prop="date">
+      <el-form-item label="申报时间" prop="date">
         <el-date-picker
           v-model="queryForm.date" type="daterange" range-separator="-" start-placeholder="开始时间"
           end-placeholder="结束时间" clearable style="width:250px"
@@ -296,17 +278,11 @@ const handleCurrentChange = (val: number) => {
         header-cell-class-name="header-style" empty-text="暂无数据" :max-height="tableHeight"
       >
         <el-table-column prop="date" label="企业名称" min-width="150" />
-        <el-table-column prop="date" label="昵称" min-width="150" />
+        <el-table-column prop="date" label="客户昵称" min-width="150" />
         <el-table-column prop="name" label="客户手机号" min-width="120" />
-        <el-table-column prop="state" label="申报状态" min-width="120" />
-        <el-table-column prop="city" label="国税密码" min-width="120" />
-        <el-table-column prop="address" label="个税申报密码" min-width="120" />
-        <el-table-column prop="zip" label="办税人姓名" min-width="120" />
-        <el-table-column prop="zip" label="办税人身份证" min-width="120" />
-        <el-table-column prop="zip" label="办税人员自然人账号/密码" min-width="120" />
         <el-table-column prop="zip" label="法人身份证" min-width="120" />
         <el-table-column prop="zip" label="法人手机号" min-width="120" />
-        <el-table-column prop="zip" label="添加时间" min-width="120" />
+        <el-table-column prop="zip" label="申报时间" min-width="120" />
         <el-table-column prop="remark" label="备注" min-width="120" />
         <el-table-column label="Operations" fixed="right" min-width="120">
           <template #default>
@@ -322,9 +298,9 @@ const handleCurrentChange = (val: number) => {
     </div>
     <div w-full flex justify-end mt-5>
       <el-pagination
-        v-model:currentPage="page" v-model:page-size="limit" :page-sizes="[10, 20, 50, 100]" background
-        layout="total, sizes, prev, pager, next, jumper" :total="400" @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
+        v-model:currentPage="page" v-model:page-size="limit"
+        :page-sizes="[10, 20, 50, 100]" background layout="total, sizes, prev, pager, next, jumper" :total="400"
+        @size-change="handleSizeChange" @current-change="handleCurrentChange"
       />
     </div>
   </div>
