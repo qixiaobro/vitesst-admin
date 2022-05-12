@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import type { FormInstance, FormRules } from 'element-plus'
-import { getBlobCaptcha, userLogin } from '~/api/modules/user'
+import { getBlobCaptcha, userInfo, userLogin } from '~/api/modules/user'
 import type { Login } from '~/api/interface'
+// import { UseUserStore } from '~/store/modules/user'
 
 const router = useRouter()
 
@@ -35,6 +36,17 @@ onMounted(() => {
   getCaptcha()
 })
 
+// const userStore = UseUserStore()
+// const getUserInfo = async () => {
+//   try {
+//     const res = await userInfo()
+//     // userStore.setUserInfo(res.data)
+//   }
+//   catch {
+
+//   }
+// }
+
 const loading = ref(false)
 const handleLogin = (formEl: FormInstance | undefined) => {
   if (!formEl)
@@ -52,14 +64,17 @@ const handleLogin = (formEl: FormInstance | undefined) => {
       sessionStorage.setItem('token', res.data.token)
       ElMessage.success('登录成功')
       loading.value = false
+      // getUserInfo()
       router.push('/')
     }
     catch (err: any) {
       loading.value = false
+      getCaptcha()
       ElMessage.error(err.msg)
     }
   })
 }
+
 </script>
 <template>
   <div class="page-login" flex items-center justify-center>

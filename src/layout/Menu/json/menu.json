@@ -13,18 +13,24 @@
   },
   {
     "id": "3",
+    "icon": "Discount",
+    "title": "公司列表",
+    "path": "/company/companyList"
+  },
+  {
+    "id": "4",
     "icon": "Collection",
     "title": "申报管理",
     "path": "/declare/declareList",
     "children": [
       {
-        "id": "31",
+        "id": "41",
         "path": "/declare/declareList",
         "title": "待申报列表",
         "icon": "Document"
       },
       {
-        "id": "32",
+        "id": "42",
         "path": "/declare/declareLog",
         "title": "申报记录",
         "icon": "DocumentChecked"
