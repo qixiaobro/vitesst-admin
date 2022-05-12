@@ -2,7 +2,7 @@
  * @Author: qixiaobro
  * @Date: 2022-05-08 22:16:11
  * @LastEditors: qixiaobro
- * @LastEditTime: 2022-05-11 18:30:00
+ * @LastEditTime: 2022-05-12 10:55:35
  * @Description: 用户列表
  * Copyright (c) 2022 by qixiaobro, All Rights Reserved.
 -->
@@ -11,12 +11,12 @@ import type { FormInstance } from 'element-plus/lib/components/form'
 
 const tableHeight = ref('auto')
 onMounted(() => {
-  tableHeight.value = `${window.innerHeight - 430}px`
+  tableHeight.value = `${window.innerHeight - 290}px`
 })
 const options = [
   {
     value: '1',
-    label: '客户手机号',
+    label: '公司名称',
   },
   {
     value: '2',
@@ -24,15 +24,11 @@ const options = [
   },
   {
     value: '3',
-    label: '邀请人手机号',
+    label: '客户手机号',
   },
   {
     value: '4',
-    label: '邀请人昵称',
-  },
-  {
-    value: '5',
-    label: '备注',
+    label: '法人身份证',
   },
 ]
 const queryForm = reactive({
@@ -249,21 +245,7 @@ const handleCurrentChange = (val: number) => {
 
 </script>
 <template>
-  <el-row :gutter="20">
-    <el-col :span="6">
-      <DataCard color="indigo-600" title="公司总数（家）" num="30000" icon="i-carbon:user-activity" />
-    </el-col>
-    <el-col :span="6">
-      <DataCard color="pink-600" title="申报公司数（家）" num="30000" icon="i-carbon:currency-dollar" />
-    </el-col>
-    <el-col :span="6">
-      <DataCard color="purple-600" title="今日新增客户（人）" num="30000" icon="i-carbon:user-follow" />
-    </el-col>
-    <el-col :span="6">
-      <DataCard color="yellow-600" title="今日充值金额（元）" num="30000" icon="i-carbon:currency" />
-    </el-col>
-  </el-row>
-  <div class="w-full rounded shadow-xl bg-white mt-5 p-5 box-border">
+  <div class="w-full rounded shadow-xl bg-white p-5 box-border">
     <!--搜索表单-->
     <el-form ref="queryFormRef" :inline="true" :model="queryForm">
       <el-form-item label="搜索" prop="region" style="margin-right:0">
@@ -274,7 +256,7 @@ const handleCurrentChange = (val: number) => {
       <el-form-item prop="user">
         <el-input v-model="queryForm.user" style="width:120px;margin-left:-5px" placeholder="请输入查询内容" clearable />
       </el-form-item>
-      <el-form-item label="注册时间" prop="date">
+      <el-form-item label="申报时间" prop="date">
         <el-date-picker
           v-model="queryForm.date" type="daterange" range-separator="-" start-placeholder="开始时间"
           end-placeholder="结束时间" clearable style="width:250px"
@@ -295,12 +277,12 @@ const handleCurrentChange = (val: number) => {
         w-full :data="tableData" stripe size="large" highlight-current-row style="width: 100%"
         header-cell-class-name="header-style" empty-text="暂无数据" :max-height="tableHeight"
       >
-        <el-table-column prop="date" label="昵称" min-width="150" />
-        <el-table-column prop="name" label="手机号" min-width="120" />
-        <el-table-column prop="state" label="头像" min-width="120" />
-        <el-table-column prop="city" label="公司数" min-width="120" />
-        <el-table-column prop="address" label="邀请人" min-width="600" />
-        <el-table-column prop="zip" label="注册时间" min-width="120" />
+        <el-table-column prop="date" label="企业名称" min-width="150" />
+        <el-table-column prop="date" label="客户昵称" min-width="150" />
+        <el-table-column prop="name" label="客户手机号" min-width="120" />
+        <el-table-column prop="zip" label="法人身份证" min-width="120" />
+        <el-table-column prop="zip" label="法人手机号" min-width="120" />
+        <el-table-column prop="zip" label="申报时间" min-width="120" />
         <el-table-column prop="remark" label="备注" min-width="120" />
         <el-table-column label="Operations" fixed="right" min-width="120">
           <template #default>

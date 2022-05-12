@@ -16,7 +16,6 @@ const declareRouter: Array<RouteRecordRaw> = [
         component: () => import('~/pages/declare/DeclareList.vue'),
         meta: {
           keepAlive: true,
-          requiresAuth: true,
           title: '待申报列表',
         },
       },
@@ -25,8 +24,23 @@ const declareRouter: Array<RouteRecordRaw> = [
         component: () => import('~/pages/declare/DeclareLog.vue'),
         meta: {
           keepAlive: true,
-          requiresAuth: true,
           title: '申报记录',
+        },
+      },
+      {
+        path: 'newDeclare/:status',
+        component: () => import('~/pages/declare/DeclareChange.vue'),
+        meta: {
+          keepAlive: true,
+          title: '新增申报列表',
+        },
+      },
+      {
+        path: 'stopDeclare/:status',
+        component: () => import('~/pages/declare/DeclareChange.vue'),
+        meta: {
+          keepAlive: true,
+          title: '停止申报列表',
         },
       },
     ],

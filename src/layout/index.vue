@@ -18,9 +18,9 @@ import Tabs from './Tabs/index.vue'
         <section class="main-box">
           <router-view v-slot="{ Component }">
             <keep-alive>
-              <component :is="Component" v-if="$route.meta.keepAlive" :key="$route.name" />
+              <component :is="Component" v-if="$route.meta.keepAlive" :key="$route.path" />
             </keep-alive>
-            <component :is="Component" v-if="!$route.meta.keepAlive" :key="$route.name" />
+            <component :is="Component" v-if="!$route.meta.keepAlive" :key="$route.path" />
           </router-view>
         </section>
       </el-main>
