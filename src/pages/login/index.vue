@@ -61,7 +61,7 @@ const handleLogin = (formEl: FormInstance | undefined) => {
         pwd: loginForm.pwd,
         imgCode: loginForm.imgCode,
       })
-      sessionStorage.setItem('token', res.data.token)
+      sessionStorage.setItem('token', res.token)
       ElMessage.success('登录成功')
       loading.value = false
       // getUserInfo()

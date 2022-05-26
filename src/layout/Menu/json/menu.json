@@ -36,5 +36,11 @@
         "icon": "DocumentChecked"
       }
     ]
+  },
+  {
+    "id": "5",
+    "icon": "List",
+    "title": "订单列表",
+    "path": "/order/orderList"
   }
 ]
