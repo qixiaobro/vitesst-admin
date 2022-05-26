@@ -2,11 +2,12 @@
  * @Author: qixiaobro
  * @Date: 2022-05-08 22:16:11
  * @LastEditors: qixiaobro
- * @LastEditTime: 2022-05-26 15:06:05
+ * @LastEditTime: 2022-05-26 22:41:04
  * @Description: 用户列表
  * Copyright (c) 2022 by qixiaobro, All Rights Reserved.
 -->
 <script lang="ts" setup name="clientList">
+import { log } from 'console'
 import { useTable } from '~/composables/useTable'
 import { getDeclareRecord } from '~/api/modules/declare'
 import { timeStampToDate } from '~/composables/timeFormat'
@@ -49,10 +50,24 @@ watch(data, (val) => {
   else
     searchParam.value.data = ''
 
-  search()
+  if (!(Array.isArray(val) && val.length === 0))
+    search()
 })
 
+/**
+ * @description: 重置时间
+ * @return {*}
+ */
+const resetData = () => {
+  data.value = []
+}
+
 onActivated(() => {
+  const route = useRoute()
+  if (route.params.companyName) {
+    searchParam.value.field_name = 'company_name'
+    searchParam.value.field_value = route.params.companyName
+  }
   getTableList()
 })
 
@@ -82,7 +97,7 @@ onActivated(() => {
         <el-button type="primary" auto-insert-space @click="search">
           查询
         </el-button>
-        <el-button type="primary" plain auto-insert-space @click="reset">
+        <el-button type="primary" plain auto-insert-space @click="()=>{reset();resetData()}">
           重置
         </el-button>
       </el-form-item>
