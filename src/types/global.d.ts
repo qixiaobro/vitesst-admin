@@ -2,6 +2,7 @@
 declare namespace Menu {
   interface MenuOptions {
     path: string
+    fullPath: string
     title: string
     icon?: string
     isLink?: string

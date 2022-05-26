@@ -22,6 +22,7 @@ watch(
     const params: Menu.MenuOptions = {
       title: route.meta.title as string,
       path: route.path,
+      fullPath: route.fullPath,
       close: true,
     }
     // debugger
@@ -68,10 +69,10 @@ const closeAllTab = () => {
       <el-tabs v-model="tabsMenuValue" type="card" @tab-click="tabClick" @tab-remove="removeTab">
         <el-tab-pane
           v-for="item in tabsMenuList"
-          :key="item.path"
-          :path="item.path"
+          :key="item.fullPath"
+          :path="item.fullPath"
           :label="item.title"
-          :name="item.path"
+          :name="item.fullPath"
           :closable="item.close"
         >
           <template #label>

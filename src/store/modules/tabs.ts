@@ -16,18 +16,27 @@ export const UseTabsStore = defineStore({
     // Add Tabs
     async addTabs(tabItem: Menu.MenuOptions) {
       // not add tabs black list
+
       if (TABS_BLACK_LIST.includes(tabItem.path))
         return
       const tabInfo: Menu.MenuOptions = {
         title: tabItem.title,
         path: tabItem.path,
+        fullPath: tabItem.fullPath,
         close: tabItem.close,
+      }
+      // 同一个路由，但是query参数不一样，需要关闭之前的tab
+      for (let i = 0; i < this.tabsMenuList.length; i++) {
+        if (this.tabsMenuList[i].path === tabItem.path && this.tabsMenuList[i].fullPath !== tabItem.fullPath) {
+          this.tabsMenuList.splice(i, 1)
+          break
+        }
       }
       if (this.tabsMenuList.every(item => item.path !== tabItem.path))
         this.tabsMenuList.push(tabInfo)
 
-      this.setTabsMenuValue(tabItem.path)
-      router.push(tabItem.path)
+      this.setTabsMenuValue(tabItem.fullPath)
+      // router.push(tabItem.fullPath)
     },
     // Remove Tabs
     async removeTabs(tabPath: string) {
