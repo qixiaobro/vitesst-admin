@@ -9,7 +9,7 @@ export const UseTabsStore = defineStore({
   id: 'UseTabsStore',
   state: (): TabsState => ({
     tabsMenuValue: HOME_URL,
-    tabsMenuList: [{ title: '首页', path: HOME_URL, icon: 'home-filled', close: false }],
+    tabsMenuList: [{ title: '首页', path: HOME_URL, fullPath: '/', icon: 'home-filled', close: false }],
   }),
   getters: {},
   actions: {
@@ -44,23 +44,23 @@ export const UseTabsStore = defineStore({
       const tabsMenuList = this.tabsMenuList
       if (tabsMenuValue === tabPath) {
         tabsMenuList.forEach((item, index) => {
-          if (item.path !== tabPath)
+          if (item.fullPath !== tabPath)
             return
           const nextTab = tabsMenuList[index + 1] || tabsMenuList[index - 1]
           if (!nextTab)
             return
-          tabsMenuValue = nextTab.path
-          router.push(nextTab.path)
+          tabsMenuValue = nextTab.fullPath
+          router.push(nextTab.fullPath)
         })
       }
       this.tabsMenuValue = tabsMenuValue
-      this.tabsMenuList = tabsMenuList.filter(item => item.path !== tabPath)
+      this.tabsMenuList = tabsMenuList.filter(item => item.fullPath !== tabPath)
     },
     // Change Tabs
     async changeTabs(tabItem: TabPaneProps) {
       this.tabsMenuList.forEach((item) => {
         if (item.title === tabItem.label)
-          router.push(item.path)
+          router.push(item.fullPath)
       })
     },
     // Set TabsMenuValue
@@ -74,7 +74,7 @@ export const UseTabsStore = defineStore({
     // Close MultipleTab
     async closeMultipleTab(tabsMenuValue?: string) {
       this.tabsMenuList = this.tabsMenuList.filter((item) => {
-        return item.path === tabsMenuValue || item.path === HOME_URL
+        return item.fullPath === tabsMenuValue || item.fullPath === HOME_URL
       })
     },
     // Go Home
