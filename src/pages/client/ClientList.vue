@@ -2,7 +2,7 @@
  * @Author: qixiaobro
  * @Date: 2022-05-08 22:16:11
  * @LastEditors: qixiaobro
- * @LastEditTime: 2022-05-26 20:33:22
+ * @LastEditTime: 2022-05-26 22:27:07
  * @Description: 用户列表
  * Copyright (c) 2022 by qixiaobro, All Rights Reserved.
 -->
@@ -52,7 +52,8 @@ watch(data, (val) => {
   else
     searchParam.value.data = ''
 
-  search()
+  if (!(Array.isArray(val) && val.length === 0))
+    search()
 })
 
 /**
@@ -67,6 +68,14 @@ const handleBalanceLog = (phone: string) => {
       phone,
     },
   })
+}
+
+/**
+ * @description: 重置时间
+ * @return {*}
+ */
+const resetData = () => {
+  data.value = []
 }
 
 onActivated(() => {
@@ -113,7 +122,7 @@ onActivated(() => {
         <el-button type="primary" auto-insert-space @click="search">
           查询
         </el-button>
-        <el-button type="primary" plain auto-insert-space @click="reset">
+        <el-button type="primary" plain auto-insert-space @click="()=>{reset();resetData()}">
           重置
         </el-button>
       </el-form-item>

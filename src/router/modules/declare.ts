@@ -21,6 +21,7 @@ const declareRouter: Array<RouteRecordRaw> = [
       },
       {
         path: 'declareLog',
+        name: 'declareLog',
         component: () => import('~/pages/declare/DeclareLog.vue'),
         meta: {
           keepAlive: true,

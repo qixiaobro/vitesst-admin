@@ -2,7 +2,7 @@
  * @Author: qixiaobro
  * @Date: 2022-05-08 22:16:11
  * @LastEditors: qixiaobro
- * @LastEditTime: 2022-05-26 15:01:56
+ * @LastEditTime: 2022-05-26 22:31:23
  * @Description: 用户列表
  * Copyright (c) 2022 by qixiaobro, All Rights Reserved.
 -->
@@ -49,8 +49,17 @@ watch(data, (val) => {
   else
     searchParam.value.data = ''
 
-  search()
+  if (!(Array.isArray(val) && val.length === 0))
+    search()
 })
+
+/**
+ * @description: 重置时间
+ * @return {*}
+ */
+const resetData = () => {
+  data.value = []
+}
 
 /**
  * @description: 修改申报状态
@@ -90,6 +99,20 @@ const handleDeleteCompany = async (name: string, id: number) => {
     catch (err: any) {
       ElMessage.error(err.msg || err.message)
     }
+  })
+}
+
+/**
+ * @description: 查看申报记录
+ * @return {*}
+ */
+const router = useRouter()
+const handleCheckDeclareLog = (companyName: string) => {
+  router.push({
+    name: 'declareLog',
+    params: {
+      companyName,
+    },
   })
 }
 
@@ -149,7 +172,7 @@ onActivated(() => {
         <el-button type="primary" auto-insert-space @click="search">
           查询
         </el-button>
-        <el-button type="primary" plain auto-insert-space @click="reset">
+        <el-button type="primary" plain auto-insert-space @click="()=>{reset();resetData()}">
           重置
         </el-button>
       </el-form-item>
@@ -225,6 +248,9 @@ onActivated(() => {
                 </span>
                 <template #dropdown>
                   <el-dropdown-menu>
+                    <el-dropdown-item @click="handleCheckDeclareLog(scope.row.company_name)">
+                      申报记录
+                    </el-dropdown-item>
                     <el-dropdown-item>修改</el-dropdown-item>
                     <el-dropdown-item @click="handleDeleteCompany(scope.row.company_name, scope.row.id)">
                       删除

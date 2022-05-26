@@ -2,7 +2,7 @@
  * @Author: qixiaobro
  * @Date: 2022-05-08 22:16:11
  * @LastEditors: qixiaobro
- * @LastEditTime: 2022-05-26 20:35:10
+ * @LastEditTime: 2022-05-26 22:26:30
  * @Description: 用户列表
  * Copyright (c) 2022 by qixiaobro, All Rights Reserved.
 -->
@@ -14,12 +14,12 @@ import { timeStampToDate } from '~/composables/timeFormat'
 const tableHeight = ref('auto')
 
 const route = useRoute()
-console.log(route)
 
 const { phone } = route.query
 
 const { tableData, loading, pageable, searchParam, initSearchParam, search, getTableList, reset, handleSizeChange, handleCurrentChange } = useTable(getBalanceChangeList)
 
+searchParam.value.phone = phone
 initSearchParam.value.phone = phone
 /**
  * @description: 监听时间查询
@@ -33,17 +33,22 @@ watch(data, (val) => {
   else
     searchParam.value.data = ''
 
-  search()
+  if (!(Array.isArray(val) && val.length === 0))
+    search()
 })
+
+/**
+ * @description: 重置时间
+ * @return {*}
+ */
+const resetData = () => {
+  data.value = []
+}
 
 onMounted(() => {
   tableHeight.value = `${window.innerHeight - 290}px`
   getTableList()
 })
-
-// onActivated(() => {
-//   getTableList()
-// })
 
 </script>
 <template>
@@ -60,7 +65,7 @@ onMounted(() => {
         <el-button type="primary" auto-insert-space @click="search">
           查询
         </el-button>
-        <el-button type="primary" plain auto-insert-space @click="reset">
+        <el-button type="primary" plain auto-insert-space @click="()=>{reset();resetData()}">
           重置
         </el-button>
       </el-form-item>
