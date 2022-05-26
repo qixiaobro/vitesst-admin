@@ -2,12 +2,14 @@
  * @Author: qixiaobro
  * @Date: 2022-05-08 22:16:11
  * @LastEditors: qixiaobro
- * @LastEditTime: 2022-05-11 17:28:03
+ * @LastEditTime: 2022-05-26 20:33:22
  * @Description: 用户列表
  * Copyright (c) 2022 by qixiaobro, All Rights Reserved.
 -->
 <script lang="ts" setup name="clientList">
-import type { FormInstance } from 'element-plus/lib/components/form'
+import { getClientList } from '~/api/modules/client'
+import { useTable } from '~/composables/useTable'
+import { timeStampToDate } from '~/composables/timeFormat'
 
 const tableHeight = ref('auto')
 onMounted(() => {
@@ -15,237 +17,61 @@ onMounted(() => {
 })
 const options = [
   {
-    value: '1',
+    value: 'phone',
     label: '客户手机号',
   },
   {
-    value: '2',
+    value: 'account',
     label: '客户昵称',
   },
   {
-    value: '3',
+    value: 'spread_phone',
     label: '邀请人手机号',
   },
   {
-    value: '4',
+    value: 'spread_name',
     label: '邀请人昵称',
   },
   {
-    value: '5',
+    value: 'remark',
     label: '备注',
   },
 ]
-const queryForm = reactive({
-  user: '',
-  region: '',
-  date: '',
+
+const { tableData, loading, pageable, searchParam, search, getTableList, reset, handleSizeChange, handleCurrentChange } = useTable(getClientList)
+
+/**
+ * @description: 监听时间查询
+ * @return {*}
+ */
+const data = ref([])
+watch(data, (val) => {
+  if (val && Array.isArray(val) && val.length > 0)
+    searchParam.value.data = val.join('-')
+
+  else
+    searchParam.value.data = ''
+
+  search()
 })
 
-const page = ref(0)
-const limit = ref(10)
-
-const onSubmit = () => {
-
-}
-
-const queryFormRef = ref<FormInstance>()
-const resetForm = (formEl: FormInstance | undefined) => {
-  if (!formEl)
-    return
-  formEl.resetFields()
-}
-
-const handleClick = () => {
-}
-
-const tableData = [
-  {
-    date: '2016-05-03',
-    name: 'Tom',
-    state: 'California',
-    city: 'Los Angeles',
-    address: 'No. 189, Grove St, Los Angeles',
-    zip: 'CA 90036',
-    tag: 'Home',
-  },
-  {
-    date: '2016-05-02',
-    name: 'Tom',
-    state: 'California',
-    city: 'Los Angeles',
-    address: 'No. 189, Grove St, Los Angeles',
-    zip: 'CA 90036',
-    tag: 'Office',
-  },
-  {
-    date: '2016-05-04',
-    name: 'Tom',
-    state: 'California',
-    city: 'Los Angeles',
-    address: 'No. 189, Grove St, Los Angeles',
-    zip: 'CA 90036',
-    tag: 'Home',
-  },
-  {
-    date: '2016-05-01',
-    name: 'Tom',
-    state: 'California',
-    city: 'Los Angeles',
-    address: 'No. 189, Grove St, Los Angeles',
-    zip: 'CA 90036',
-    tag: 'Office',
-  }, {
-    date: '2016-05-01',
-    name: 'Tom',
-    state: 'California',
-    city: 'Los Angeles',
-    address: 'No. 189, Grove St, Los Angeles',
-    zip: 'CA 90036',
-    tag: 'Office',
-  }, {
-    date: '2016-05-01',
-    name: 'Tom',
-    state: 'California',
-    city: 'Los Angeles',
-    address: 'No. 189, Grove St, Los Angeles',
-    zip: 'CA 90036',
-    tag: 'Office',
-  }, {
-    date: '2016-05-01',
-    name: 'Tom',
-    state: 'California',
-    city: 'Los Angeles',
-    address: 'No. 189, Grove St, Los Angeles',
-    zip: 'CA 90036',
-    tag: 'Office',
-  }, {
-    date: '2016-05-01',
-    name: 'Tom',
-    state: 'California',
-    city: 'Los Angeles',
-    address: 'No. 189, Grove St, Los Angeles',
-    zip: 'CA 90036',
-    tag: 'Office',
-  }, {
-    date: '2016-05-01',
-    name: 'Tom',
-    state: 'California',
-    city: 'Los Angeles',
-    address: 'No. 189, Grove St, Los Angeles',
-    zip: 'CA 90036',
-    tag: 'Office',
-  }, {
-    date: '2016-05-01',
-    name: 'Tom',
-    state: 'California',
-    city: 'Los Angeles',
-    address: 'No. 189, Grove St, Los Angeles',
-    zip: 'CA 90036',
-    tag: 'Office',
-  }, {
-    date: '2016-05-01',
-    name: 'Tom',
-    state: 'California',
-    city: 'Los Angeles',
-    address: 'No. 189, Grove St, Los Angeles',
-    zip: 'CA 90036',
-    tag: 'Office',
-  }, {
-    date: '2016-05-01',
-    name: 'Tom',
-    state: 'California',
-    city: 'Los Angeles',
-    address: 'No. 189, Grove St, Los Angeles',
-    zip: 'CA 90036',
-    tag: 'Office',
-  }, {
-    date: '2016-05-01',
-    name: 'Tom',
-    state: 'California',
-    city: 'Los Angeles',
-    address: 'No. 189, Grove St, Los Angeles',
-    zip: 'CA 90036',
-    tag: 'Office',
-  }, {
-    date: '2016-05-01',
-    name: 'Tom',
-    state: 'California',
-    city: 'Los Angeles',
-    address: 'No. 189, Grove St, Los Angeles',
-    zip: 'CA 90036',
-    tag: 'Office',
-  }, {
-    date: '2016-05-01',
-    name: 'Tom',
-    state: 'California',
-    city: 'Los Angeles',
-    address: 'No. 189, Grove St, Los Angeles',
-    zip: 'CA 90036',
-    tag: 'Office',
-  }, {
-    date: '2016-05-01',
-    name: 'Tom',
-    state: 'California',
-    city: 'Los Angeles',
-    address: 'No. 189, Grove St, Los Angeles',
-    zip: 'CA 90036',
-    tag: 'Office',
-  }, {
-    date: '2016-05-01',
-    name: 'Tom',
-    state: 'California',
-    city: 'Los Angeles',
-    address: 'No. 189, Grove St, Los Angeles',
-    zip: 'CA 90036',
-    tag: 'Office',
-  }, {
-    date: '2016-05-01',
-    name: 'Tom',
-    state: 'California',
-    city: 'Los Angeles',
-    address: 'No. 189, Grove St, Los Angeles',
-    zip: 'CA 90036',
-    tag: 'Office',
-  }, {
-    date: '2016-05-01',
-    name: 'Tom',
-    state: 'California',
-    city: 'Los Angeles',
-    address: 'No. 189, Grove St, Los Angeles',
-    zip: 'CA 90036',
-    tag: 'Office',
-  },
-]
-
 /**
- * @description: 搜索数据
- * @param {*}
+ * @description: 查看余额变动记录
  * @return {*}
  */
-const handleSearch = () => {
-
+const router = useRouter()
+const handleBalanceLog = (phone: string) => {
+  router.push({
+    path: '/client/balanceLog',
+    query: {
+      phone,
+    },
+  })
 }
 
-/**
- * @description: 处理每页条数变化
- * @param {*} val
- * @return {*}
- */
-const handleSizeChange = (val: number) => {
-  limit.value = val
-  page.value = 0
-  handleSearch()
-}
-
-/**
- * @description: 处理页码变化
- * @param {*} val
- * @return {*}
- */
-const handleCurrentChange = (val: number) => {
-  page.value = val
-  handleSearch()
-}
+onActivated(() => {
+  getTableList()
+})
 
 </script>
 <template>
@@ -265,26 +91,29 @@ const handleCurrentChange = (val: number) => {
   </el-row>
   <div class="w-full rounded shadow-xl bg-white mt-5 p-5 box-border">
     <!--搜索表单-->
-    <el-form ref="queryFormRef" :inline="true" :model="queryForm">
-      <el-form-item label="搜索" prop="region" style="margin-right:0">
-        <el-select v-model="queryForm.region" style="width:125px">
+    <el-form ref="queryFormRef" :inline="true" :model="searchParam">
+      <el-form-item label="搜索" prop="field_name" style="margin-right:0">
+        <el-select v-model="searchParam.field_name" style="width:125px">
           <el-option v-for="(item, index) in options" :key="index" :label="item.label" :value="item.value" />
         </el-select>
       </el-form-item>
-      <el-form-item prop="user">
-        <el-input v-model="queryForm.user" style="width:120px;margin-left:-5px" placeholder="请输入查询内容" clearable />
+      <el-form-item prop="field_value">
+        <el-input
+          v-model="searchParam.field_value" style="width:120px;margin-left:-5px" placeholder="请输入查询内容" clearable
+          @change="search"
+        />
       </el-form-item>
-      <el-form-item label="注册时间" prop="date">
+      <el-form-item label="注册时间" prop="data">
         <el-date-picker
-          v-model="queryForm.date" type="daterange" range-separator="-" start-placeholder="开始时间"
-          end-placeholder="结束时间" clearable style="width:250px"
+          v-model="data" type="daterange" range-separator="-" start-placeholder="开始时间"
+          value-format="YYYY/MM/DD" end-placeholder="结束时间" clearable style="width:250px"
         />
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" auto-insert-space @click="onSubmit">
+        <el-button type="primary" auto-insert-space @click="search">
           查询
         </el-button>
-        <el-button type="primary" plain auto-insert-space @click="resetForm(queryFormRef)">
+        <el-button type="primary" plain auto-insert-space @click="reset">
           重置
         </el-button>
       </el-form-item>
@@ -292,23 +121,34 @@ const handleCurrentChange = (val: number) => {
     <!--数据表格-->
     <div class="data-table w-full">
       <el-table
-        w-full :data="tableData" stripe size="large" highlight-current-row style="width: 100%"
-        header-cell-class-name="header-style" empty-text="暂无数据" :max-height="tableHeight"
+        v-loading="loading" w-full :data="tableData" stripe size="large" highlight-current-row
+        style="width: 100%" header-cell-class-name="header-style" empty-text="暂无数据" :max-height="tableHeight"
       >
-        <el-table-column prop="date" label="昵称" min-width="150" />
-        <el-table-column prop="name" label="手机号" min-width="120" />
-        <el-table-column prop="state" label="头像" min-width="120" />
-        <el-table-column prop="city" label="公司数" min-width="120" />
-        <el-table-column prop="address" label="邀请人" min-width="600" />
-        <el-table-column prop="zip" label="注册时间" min-width="120" />
-        <el-table-column prop="remark" label="备注" min-width="120" />
-        <el-table-column label="Operations" fixed="right" min-width="120">
-          <template #default>
-            <el-button text size="small" @click="handleClick">
-              Detail
+        <el-table-column prop="nickname" label="昵称" show-overflow-tooltip min-width="120" />
+        <el-table-column prop="phone" label="手机号" min-width="120" align="center" />
+        <el-table-column prop="avatar" label="头像" show-overflow-tooltip width="140" align="center">
+          <template #default="scope">
+            <el-avatar :src="scope.row.avatar" />
+          </template>
+        </el-table-column>
+        <el-table-column prop="company_count" label="公司数（家）" min-width="120" align="center" />
+        <el-table-column prop="now_money" label="余额（元）" min-width="120" align="center" />
+        <el-table-column prop="spread_name" label="邀请人" min-width="120" align="center" />
+        <el-table-column
+          prop="add_time" label="注册时间" min-width="180" align="center"
+          :formatter="(row, column, cellValue, index) => timeStampToDate(cellValue * 1000)"
+        />
+        <el-table-column prop="mark" label="备注" show-overflow-tooltip min-width="120" />
+        <el-table-column label="操作" fixed="right" align="center" min-width="250">
+          <template #default="scope">
+            <el-button size="small" type="primary" auto-insert-space>
+              充值
             </el-button>
-            <el-button text size="small">
-              Edit
+            <el-button size="small" type="primary" plain auto-insert-space>
+              编辑
+            </el-button>
+            <el-button size="small" link type="primary" @click="handleBalanceLog(scope.row.phone)">
+              余额变动记录
             </el-button>
           </template>
         </el-table-column>
@@ -316,8 +156,8 @@ const handleCurrentChange = (val: number) => {
     </div>
     <div w-full flex justify-end mt-5>
       <el-pagination
-        v-model:currentPage="page" v-model:page-size="limit"
-        :page-sizes="[10, 20, 50, 100]" background layout="total, sizes, prev, pager, next, jumper" :total="400"
+        :current-page="pageable.page" :page-size="pageable.limit" :page-sizes="[10, 20, 50, 100]"
+        background layout="total, sizes, prev, pager, next, jumper" :total="pageable.count"
         @size-change="handleSizeChange" @current-change="handleCurrentChange"
       />
     </div>

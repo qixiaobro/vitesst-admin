@@ -6,6 +6,7 @@ const clientRouter: Array<RouteRecordRaw> = [
   {
     path: '/client',
     component: Layout,
+    redirect: '/client/clientList',
     meta: {
       title: '客户管理',
     },
@@ -17,6 +18,14 @@ const clientRouter: Array<RouteRecordRaw> = [
           keepAlive: true,
           requiresAuth: true,
           title: '客户列表',
+        },
+      },
+      {
+        path: 'balanceLog',
+        component: () => import('~/pages/client/BalanceLog.vue'),
+        meta: {
+          requiresAuth: true,
+          title: '余额变动记录',
         },
       },
     ],

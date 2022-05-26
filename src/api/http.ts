@@ -41,12 +41,13 @@ axiosInstance.interceptors.response.use(
       if (response.request.responseType === 'blob')
         return response.data
       else if (response.data.status === 200)
-        return Promise.resolve(response.data)
+        return Promise.resolve(response.data.data)
       else
-        return Promise.reject(response.data)
+        ElMessage.error(response.data.msg)
+      return Promise.reject(response.data)
     }
 
-    ElMessage.info(JSON.stringify(response.status))
+    ElMessage.error(JSON.stringify(response.status))
     return Promise.reject(response)
   },
   (error: AxiosError) => {

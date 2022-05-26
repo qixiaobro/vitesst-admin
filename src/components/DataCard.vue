@@ -2,7 +2,7 @@
  * @Author: qixiaobro
  * @Date: 2022-05-10 18:10:19
  * @LastEditors: qixiaobro
- * @LastEditTime: 2022-05-12 11:56:31
+ * @LastEditTime: 2022-05-26 14:55:58
  * @Description: 数据卡片
  * Copyright (c) 2022 by qixiaobro, All Rights Reserved.
 -->
@@ -12,7 +12,7 @@ interface Props {
   title: string
   num: string
   icon: string
-  detail: boolean
+  detail?: boolean
 }
 withDefaults(defineProps<Props>(), {
   color: 'indigo-600',
