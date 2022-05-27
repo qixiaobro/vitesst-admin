@@ -2,11 +2,13 @@
  * @Author: qixiaobro
  * @Date: 2022-05-08 22:16:11
  * @LastEditors: qixiaobro
- * @LastEditTime: 2022-05-26 22:27:07
+ * @LastEditTime: 2022-05-27 17:41:45
  * @Description: 用户列表
  * Copyright (c) 2022 by qixiaobro, All Rights Reserved.
 -->
 <script lang="ts" setup name="clientList">
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+import EditClient from './components/EditClient.vue'
 import { getClientList } from '~/api/modules/client'
 import { useTable } from '~/composables/useTable'
 import { timeStampToDate } from '~/composables/timeFormat'
@@ -78,6 +80,24 @@ const resetData = () => {
   data.value = []
 }
 
+/**
+ * @description: 编辑客户信息
+ * @return {*}
+ */
+const clientInfo = ref({
+  uid: 0,
+  nickname: '',
+  avatar: '',
+  phone: '',
+  real_name: '',
+  mark: '',
+})
+const editClientRef = ref<InstanceType<typeof EditClient> | null>(null)
+const handleEditClientInfo = (row: any) => {
+  clientInfo.value = row
+  editClientRef.value?.openDialog()
+}
+
 onActivated(() => {
   getTableList()
 })
@@ -140,6 +160,7 @@ onActivated(() => {
             <el-avatar :src="scope.row.avatar" />
           </template>
         </el-table-column>
+        <el-table-column prop="real_name" label="真实姓名" min-width="120" align="center" />
         <el-table-column prop="company_count" label="公司数（家）" min-width="120" align="center" />
         <el-table-column prop="now_money" label="余额（元）" min-width="120" align="center" />
         <el-table-column prop="spread_name" label="邀请人" min-width="120" align="center" />
@@ -153,7 +174,7 @@ onActivated(() => {
             <el-button size="small" type="primary" auto-insert-space>
               充值
             </el-button>
-            <el-button size="small" type="primary" plain auto-insert-space>
+            <el-button size="small" type="primary" plain auto-insert-space @click="handleEditClientInfo(scope.row)">
               编辑
             </el-button>
             <el-button size="small" link type="primary" @click="handleBalanceLog(scope.row.phone)">
@@ -171,6 +192,9 @@ onActivated(() => {
       />
     </div>
   </div>
+
+  <!--编辑客户信息弹窗-->
+  <EditClient :id="clientInfo.uid" ref="editClientRef" :nickname="clientInfo.nickname" :avatar="clientInfo.avatar" :phone="clientInfo.phone" :real-name="clientInfo.real_name" :mark="clientInfo.mark" @submit="getTableList" />
 </template>
 <style lang="scss" scoped>
 .header-style {

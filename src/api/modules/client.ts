@@ -15,3 +15,11 @@ export const getClientList = (params?: object): Promise<any> => {
 export const getBalanceChangeList = (params?: object): Promise<any> => {
   return http.get('/user/balance', params)
 }
+
+/**
+ * @description: 编辑客户信息
+ * @return {*}
+ */
+export const editClientApi = (params: { id: number; [key: string]: any }): Promise<any> => {
+  return http.put(`/customer/customer/${params.id}`, params)
+}
