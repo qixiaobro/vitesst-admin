@@ -2,13 +2,15 @@
  * @Author: qixiaobro
  * @Date: 2022-05-08 22:16:11
  * @LastEditors: qixiaobro
- * @LastEditTime: 2022-05-27 17:53:27
+ * @LastEditTime: 2022-05-28 16:05:37
  * @Description: 用户列表
  * Copyright (c) 2022 by qixiaobro, All Rights Reserved.
 -->
 <script lang="ts" setup name="clientList">
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
 import EditClient from './components/EditClient.vue'
+import type Recharge from './components/Recharge.vue'
+import RechargeVue from './components/Recharge.vue'
 import { getClientList, getClientStatistics } from '~/api/modules/client'
 import { useTable } from '~/composables/useTable'
 import { timeStampToDate } from '~/composables/timeFormat'
@@ -99,6 +101,17 @@ const handleEditClientInfo = (row: any) => {
 }
 
 /**
+ * @description: 充值
+ * @return {*}
+ */
+const rechargeRef = ref<InstanceType<typeof Recharge> | null>(null)
+const handleRecharge = (row: any) => {
+  rechargeRef.value?.openDialog({
+    phone: row.phone, nickname: row.nickname, avatar: row.avatar,
+  })
+}
+
+/**
  * @description: 获取客户列表统计数据
  * @return {*}
  */
@@ -164,7 +177,7 @@ onActivated(() => {
         <el-button type="primary" auto-insert-space @click="search">
           查询
         </el-button>
-        <el-button type="primary" plain auto-insert-space @click="()=>{reset();resetData()}">
+        <el-button type="primary" plain auto-insert-space @click="() => { reset(); resetData() }">
           重置
         </el-button>
       </el-form-item>
@@ -193,7 +206,7 @@ onActivated(() => {
         <el-table-column prop="mark" label="备注" show-overflow-tooltip min-width="120" />
         <el-table-column label="操作" fixed="right" align="center" min-width="250">
           <template #default="scope">
-            <el-button size="small" type="primary" auto-insert-space>
+            <el-button size="small" type="primary" auto-insert-space @click="handleRecharge(scope.row)">
               充值
             </el-button>
             <el-button size="small" type="primary" plain auto-insert-space @click="handleEditClientInfo(scope.row)">
@@ -216,7 +229,13 @@ onActivated(() => {
   </div>
 
   <!--编辑客户信息弹窗-->
-  <EditClient :id="clientInfo.uid" ref="editClientRef" :nickname="clientInfo.nickname" :avatar="clientInfo.avatar" :phone="clientInfo.phone" :real-name="clientInfo.real_name" :mark="clientInfo.mark" @submit="getTableList" />
+  <EditClient
+    :id="clientInfo.uid" ref="editClientRef" :nickname="clientInfo.nickname" :avatar="clientInfo.avatar"
+    :phone="clientInfo.phone" :real-name="clientInfo.real_name" :mark="clientInfo.mark" @submit="getTableList"
+  />
+
+  <!--充值弹窗-->
+  <RechargeVue ref="rechargeRef" @submit="getTableList" />
 </template>
 <style lang="scss" scoped>
 .header-style {
