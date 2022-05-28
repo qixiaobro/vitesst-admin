@@ -2,13 +2,15 @@
  * @Author: qixiaobro
  * @Date: 2022-05-08 22:16:11
  * @LastEditors: qixiaobro
- * @LastEditTime: 2022-05-26 22:31:23
+ * @LastEditTime: 2022-05-28 14:21:13
  * @Description: 用户列表
  * Copyright (c) 2022 by qixiaobro, All Rights Reserved.
 -->
 <script lang="ts" setup name="clientList">
+import type EditCompany from './components/EditCompany.vue'
+import EditCompanyVue from './components/EditCompany.vue'
 import { useTable } from '~/composables/useTable'
-import { changeDeclareStatus, deleteCompany, getCompanyList } from '~/api/modules/company'
+import { changeDeclareStatus, deleteCompany, getCompanyList, getCompanyStatistics } from '~/api/modules/company'
 import { timeStampToDate } from '~/composables/timeFormat'
 
 const tableHeight = ref('auto')
@@ -117,9 +119,39 @@ const handleCheckDeclareLog = (companyName: string) => {
 }
 
 /**
- * @description:
+* @description: 新增/编辑公司详情
+ */
+const editCompanyRef = ref<InstanceType<typeof EditCompany> | null>(null)
+const handleEditCompany = (flag: boolean, row?: Company) => {
+  if (!flag)
+    editCompanyRef.value?.openDialog(flag)
+
+  else
+    editCompanyRef.value?.openDialog(flag, row)
+}
+
+/**
+ * @description: 获取公司统计信息
  * @return {*}
  */
+const countData = reactive({
+  totalCompany: 0,
+  currentdeclare: 0,
+  todayAdd: 0,
+  nextDeclare: 0,
+})
+const getCompanyStatisticsData = async () => {
+  try {
+    const res = await getCompanyStatistics()
+    countData.totalCompany = res[0].count
+    countData.todayAdd = res[1].count
+    countData.currentdeclare = res[2].count
+    countData.nextDeclare = res[3].count
+  }
+  catch {
+
+  }
+}
 
 onMounted(() => {
   tableHeight.value = `${window.innerHeight - 430}px`
@@ -127,19 +159,23 @@ onMounted(() => {
 
 onActivated(() => {
   getTableList()
+  getCompanyStatisticsData()
 })
 
 </script>
 <template>
   <el-row :gutter="20">
-    <el-col :span="8">
-      <DataCard color="green-600" title="公司总数（家）" num="30000" icon="i-carbon:connection-receive" />
+    <el-col :span="6">
+      <DataCard color="green-600" title="公司总数（家）" :num="countData.totalCompany" icon="i-carbon:connection-receive" />
     </el-col>
-    <el-col :span="8">
-      <DataCard color="blue-600" title="申报公司数（家）" num="30000" icon="i-carbon:data-reference" />
+    <el-col :span="6">
+      <DataCard color="blue-600" title="当前申报公司数（家）" :num="countData.currentdeclare" icon="i-carbon:data-reference" />
     </el-col>
-    <el-col :span="8">
-      <DataCard color="red-600" title="今日新增公司（家）" num="30000" icon="i-carbon:categories" />
+    <el-col :span="6">
+      <DataCard color="red-600" title="今日新增公司（家）" :num="countData.todayAdd" icon="i-carbon:categories" />
+    </el-col>
+    <el-col :span="6">
+      <DataCard color="red-600" title="下期申报公司数（家）" :num="countData.nextDeclare" icon="i-carbon:carbon" />
     </el-col>
   </el-row>
   <div class="w-full rounded shadow-xl bg-white mt-5 p-5 box-border">
@@ -172,9 +208,17 @@ onActivated(() => {
         <el-button type="primary" auto-insert-space @click="search">
           查询
         </el-button>
-        <el-button type="primary" plain auto-insert-space @click="()=>{reset();resetData()}">
+        <el-button type="primary" plain auto-insert-space @click="() => { reset(); resetData() }">
           重置
         </el-button>
+        <el-button-group class="ml-4">
+          <el-tooltip effect="dark" content="新增公司" placement="top">
+            <el-button type="primary" icon="Plus" @click="handleEditCompany(false)" />
+          </el-tooltip>
+          <el-tooltip effect="dark" content="导入公司" placement="top">
+            <el-button type="primary" icon="Upload" />
+          </el-tooltip>
+        </el-button-group>
       </el-form-item>
     </el-form>
     <!--数据表格-->
@@ -251,7 +295,9 @@ onActivated(() => {
                     <el-dropdown-item @click="handleCheckDeclareLog(scope.row.company_name)">
                       申报记录
                     </el-dropdown-item>
-                    <el-dropdown-item>修改</el-dropdown-item>
+                    <el-dropdown-item @click="handleEditCompany(true, scope.row)">
+                      修改
+                    </el-dropdown-item>
                     <el-dropdown-item @click="handleDeleteCompany(scope.row.company_name, scope.row.id)">
                       删除
                     </el-dropdown-item>
@@ -271,6 +317,9 @@ onActivated(() => {
       />
     </div>
   </div>
+
+  <!--公司编辑组件-->
+  <EditCompanyVue ref="editCompanyRef" @submit="getTableList" />
 </template>
 <style lang="scss" scoped>
 .header-style {

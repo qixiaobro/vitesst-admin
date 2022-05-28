@@ -24,3 +24,16 @@ declare interface ViteEnv {
   VITE_BUILD_GZIP: boolean
   VITE_REPORT: boolean
 }
+
+declare interface Company {
+  id?: number | string
+  company_name: string
+  national_tax_pwd: string
+  personal_tax_pwd: string
+  taxpayer_name: string
+  taxpayer_pwd: string
+  legal_person_id_card: string
+  legal_person_phone: string
+  note: string
+  [key: string]: any
+}
