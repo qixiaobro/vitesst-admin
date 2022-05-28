@@ -2,7 +2,7 @@
  * @Author: qixiaobro
  * @Date: 2022-05-10 18:10:19
  * @LastEditors: qixiaobro
- * @LastEditTime: 2022-05-26 14:55:58
+ * @LastEditTime: 2022-05-27 17:51:37
  * @Description: 数据卡片
  * Copyright (c) 2022 by qixiaobro, All Rights Reserved.
 -->
@@ -10,7 +10,7 @@
 interface Props {
   color: string
   title: string
-  num: string
+  num: string | number
   icon: string
   detail?: boolean
 }

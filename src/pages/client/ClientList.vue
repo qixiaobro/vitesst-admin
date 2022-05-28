@@ -2,14 +2,14 @@
  * @Author: qixiaobro
  * @Date: 2022-05-08 22:16:11
  * @LastEditors: qixiaobro
- * @LastEditTime: 2022-05-27 17:41:45
+ * @LastEditTime: 2022-05-27 17:53:27
  * @Description: 用户列表
  * Copyright (c) 2022 by qixiaobro, All Rights Reserved.
 -->
 <script lang="ts" setup name="clientList">
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
 import EditClient from './components/EditClient.vue'
-import { getClientList } from '~/api/modules/client'
+import { getClientList, getClientStatistics } from '~/api/modules/client'
 import { useTable } from '~/composables/useTable'
 import { timeStampToDate } from '~/composables/timeFormat'
 
@@ -98,24 +98,46 @@ const handleEditClientInfo = (row: any) => {
   editClientRef.value?.openDialog()
 }
 
+/**
+ * @description: 获取客户列表统计数据
+ * @return {*}
+ */
+const totalClient = ref(0)
+const totalMoney = ref(0)
+const todayNewClient = ref(0)
+const todayNewMoney = ref(0)
+const getClientCountData = async () => {
+  try {
+    const res = await getClientStatistics()
+    totalClient.value = res[0].count
+    totalMoney.value = res[1].count
+    todayNewClient.value = res[2].count
+    todayNewMoney.value = res[3].count
+  }
+  catch (e: any) {
+    ElMessage.error(e.msg || e.message || '获取统计数据失败')
+  }
+}
+
 onActivated(() => {
   getTableList()
+  getClientCountData()
 })
 
 </script>
 <template>
   <el-row :gutter="20">
     <el-col :span="6">
-      <DataCard color="indigo-600" title="用户总数（人）" num="30000" icon="i-carbon:user-activity" />
+      <DataCard color="indigo-600" title="用户总数（人）" :num="totalClient" icon="i-carbon:user-activity" />
     </el-col>
     <el-col :span="6">
-      <DataCard color="pink-600" title="充值总金额（元）" num="30000" icon="i-carbon:currency-dollar" />
+      <DataCard color="pink-600" title="充值总金额（元）" :num="totalMoney" icon="i-carbon:currency-dollar" />
     </el-col>
     <el-col :span="6">
-      <DataCard color="purple-600" title="今日新增客户（人）" num="30000" icon="i-carbon:user-follow" />
+      <DataCard color="purple-600" title="今日新增客户（人）" :num="todayNewClient" icon="i-carbon:user-follow" />
     </el-col>
     <el-col :span="6">
-      <DataCard color="yellow-600" title="今日充值金额（元）" num="30000" icon="i-carbon:currency" />
+      <DataCard color="yellow-600" title="今日充值金额（元）" :num="todayNewMoney" icon="i-carbon:currency" />
     </el-col>
   </el-row>
   <div class="w-full rounded shadow-xl bg-white mt-5 p-5 box-border">
