@@ -31,3 +31,19 @@ export const editClientApi = (params: { id: number; [key: string]: any }): Promi
 export const getClientStatistics = (params?: object): Promise<any> => {
   return http.get('/customer/statistics', params)
 }
+
+/**
+ * @description: 客户余额充值
+ * @return {*}
+ */
+export const rechargeClientBalance = (params?: object): Promise<any> => {
+  return http.post('/user/backstage_recharge', params)
+}
+
+/**
+ * @description: 获取赠送金额
+ * @return {*}
+ */
+export const getGiveBalance = (params?: object): Promise<any> => {
+  return http.get('/user/price_select', params)
+}

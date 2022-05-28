@@ -2,7 +2,7 @@
  * @Author: qixiaobro
  * @Date: 2022-05-08 22:16:11
  * @LastEditors: qixiaobro
- * @LastEditTime: 2022-05-26 22:26:30
+ * @LastEditTime: 2022-05-28 15:45:14
  * @Description: 用户列表
  * Copyright (c) 2022 by qixiaobro, All Rights Reserved.
 -->
@@ -19,8 +19,8 @@ const { phone } = route.query
 
 const { tableData, loading, pageable, searchParam, initSearchParam, search, getTableList, reset, handleSizeChange, handleCurrentChange } = useTable(getBalanceChangeList)
 
-searchParam.value.phone = phone
-initSearchParam.value.phone = phone
+searchParam.value.keyword = phone
+initSearchParam.value.keyword = phone
 /**
  * @description: 监听时间查询
  * @return {*}
