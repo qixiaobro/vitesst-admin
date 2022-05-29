@@ -47,3 +47,11 @@ export const editCompany = (params: Company): Promise<any> => {
 export const getCompanyStatistics = (params?: object): Promise<any> => {
   return http.get('/company/statistics', params)
 }
+
+/**
+ * @description: 导入公司
+ * @return {*}
+ */
+export const importCompany = (params: FormData | File): Promise<any> => {
+  return http.upload('/company/import', params)
+}
