@@ -55,7 +55,7 @@ const openDialog = (refName: string) => {
     </div>
     <div flex items-center>
       <!-- username -->
-      <span text-14px text-gray-500 mr-2>Geeker</span>
+      <span text-14px text-gray-500 mr-2 />
       <!-- usercenter -->
       <el-dropdown trigger="click">
         <div w-40px h-40px i-carbon-user-avatar-filled />
