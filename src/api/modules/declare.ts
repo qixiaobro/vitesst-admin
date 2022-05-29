@@ -31,3 +31,11 @@ export const getNewDeclareList = (params?: object): Promise<any> => {
 export const getDeclareRecord = (params?: object): Promise<any> => {
   return http.get('/user/declaration', params)
 }
+
+/**
+ * @description: 申报
+ * @return {*}
+ */
+export const declare = (params?: object): Promise<any> => {
+  return http.post('/user/declare', params)
+}
