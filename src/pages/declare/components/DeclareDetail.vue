@@ -1,20 +1,34 @@
 <script lang="ts" setup>
-import type { UploadProps, UploadUserFile } from 'element-plus'
+import type { UploadFile, UploadProps, UploadUserFile } from 'element-plus'
 import { getUploadFileToken } from '~/api/modules/common'
-import { declare } from '~/api/modules/declare'
+import { declare, updateDeclareRecord } from '~/api/modules/declare'
 
 const emit = defineEmits(['submit'])
 const dialogVisible = ref(false)
 
-// 新增、查看、编辑
+const editType = ref('add')
 
 /**
  * @description: 打开弹窗
  * @return {*}
  */
+const fileList = ref<UploadUserFile[]>([])
+
 const companyInfo = ref<{ id: number; [key: string]: any }>({ id: 0 })
-const openDialog = (row: any) => {
+const openDialog = (row: any, type = 'add') => {
   companyInfo.value = row
+  if (type === 'edit') {
+    editType.value = 'edit'
+    row.img_url.forEach((item: any, index: number) => {
+      const file: UploadFile = {
+        uid: index,
+        name: item,
+        url: item,
+        status: 'success',
+      }
+      fileList.value.push(file)
+    })
+  }
   dialogVisible.value = true
 }
 defineExpose({
@@ -33,7 +47,7 @@ const key = ref('')
 const getToken = async () => {
   try {
     const res = await getUploadFileToken()
-    domin.value = res.domin
+    domin.value = res.domain
     token.token = res.token
     key.value = res.key
   }
@@ -47,7 +61,6 @@ onMounted(() => {
 })
 
 const dialogImageUrl = ref('')
-const fileList = ref<UploadUserFile[]>([])
 
 const handlePictureCardPreview: UploadProps['onPreview'] = (uploadFile) => {
   dialogImageUrl.value = uploadFile.url!
@@ -62,30 +75,66 @@ const loading = ref(false)
 const handleSubmit = async () => {
   const fileListUrl = ref<string[]>([])
   fileList.value.forEach((item: UploadUserFile) => {
-    const url: any = `${domin.value}/${(item.response as any).key}`
-    fileListUrl.value.push(url)
+    if (item.response) {
+      const url: any = `${domin.value}/${(item.response as any).key}`
+      fileListUrl.value.push(url)
+    }
+    else {
+      fileListUrl.value.push((item.url as string))
+    }
   })
   if (fileListUrl.value.length === 0) {
     ElMessage.error('请上传文件')
   }
   else {
-    try {
-      loading.value = true
-      await declare({
-        company_id: companyInfo.value!.id,
-        imgs: fileListUrl.value,
-      })
-      ElMessage.success('保存成功')
-      emit('submit')
-      dialogVisible.value = false
-      loading.value = false
+    if (editType.value === 'add') {
+      try {
+        loading.value = true
+        await declare({
+          company_id: companyInfo.value!.id,
+          imgs: fileListUrl.value,
+        })
+        ElMessage.success('保存成功')
+        emit('submit')
+        dialogVisible.value = false
+        loading.value = false
+      }
+      catch {
+        ElMessage.error('保存失败')
+        loading.value = false
+      }
     }
-    catch {
-      ElMessage.error('保存失败')
-      loading.value = false
+    else {
+      try {
+        loading.value = true
+        await updateDeclareRecord({
+          id: companyInfo.value!.id,
+          imgs: fileListUrl.value,
+        })
+        ElMessage.success('保存成功')
+        emit('submit')
+        dialogVisible.value = false
+        loading.value = false
+      }
+      catch {
+        ElMessage.error('保存失败')
+        loading.value = false
+      }
     }
   }
 }
+
+/**
+ * @description: 监听弹窗关闭
+ * @return {*}
+ */
+watch(dialogVisible, (val) => {
+  if (!val) {
+    fileList.value = []
+    companyInfo.value = { id: 0 }
+    editType.value = 'add'
+  }
+})
 </script>
 
 <template>
