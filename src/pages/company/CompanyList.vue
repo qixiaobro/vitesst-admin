@@ -2,13 +2,15 @@
  * @Author: qixiaobro
  * @Date: 2022-05-08 22:16:11
  * @LastEditors: qixiaobro
- * @LastEditTime: 2022-05-28 14:21:13
+ * @LastEditTime: 2022-05-29 14:58:08
  * @Description: 用户列表
  * Copyright (c) 2022 by qixiaobro, All Rights Reserved.
 -->
 <script lang="ts" setup name="clientList">
 import type EditCompany from './components/EditCompany.vue'
 import EditCompanyVue from './components/EditCompany.vue'
+import type ImportCompany from './components/ImportCompany.vue'
+import ImportCompanyVue from './components/ImportCompany.vue'
 import { useTable } from '~/composables/useTable'
 import { changeDeclareStatus, deleteCompany, getCompanyList, getCompanyStatistics } from '~/api/modules/company'
 import { timeStampToDate } from '~/composables/timeFormat'
@@ -131,6 +133,15 @@ const handleEditCompany = (flag: boolean, row?: Company) => {
 }
 
 /**
+ * @description: 导入公司弹窗
+ * @return {*}
+ */
+const importCompanyRef = ref<InstanceType<typeof ImportCompany> | null>(null)
+const handleImportCompany = () => {
+  importCompanyRef.value?.openDialog()
+}
+
+/**
  * @description: 获取公司统计信息
  * @return {*}
  */
@@ -216,7 +227,7 @@ onActivated(() => {
             <el-button type="primary" icon="Plus" @click="handleEditCompany(false)" />
           </el-tooltip>
           <el-tooltip effect="dark" content="导入公司" placement="top">
-            <el-button type="primary" icon="Upload" />
+            <el-button type="primary" icon="Upload" @click="handleImportCompany" />
           </el-tooltip>
         </el-button-group>
       </el-form-item>
@@ -320,6 +331,9 @@ onActivated(() => {
 
   <!--公司编辑组件-->
   <EditCompanyVue ref="editCompanyRef" @submit="getTableList" />
+
+  <!--导入公司-->
+  <ImportCompanyVue ref="importCompanyRef" @submit="search" />
 </template>
 <style lang="scss" scoped>
 .header-style {
