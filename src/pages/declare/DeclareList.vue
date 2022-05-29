@@ -2,11 +2,13 @@
  * @Author: qixiaobro
  * @Date: 2022-05-08 22:16:11
  * @LastEditors: qixiaobro
- * @LastEditTime: 2022-05-26 22:27:25
+ * @LastEditTime: 2022-05-29 12:26:37
  * @Description: 用户列表
  * Copyright (c) 2022 by qixiaobro, All Rights Reserved.
 -->
 <script lang="ts" setup name="clientList">
+import DeclareDetailVue from './components/DeclareDetail.vue'
+import type DeclareDetail from './components/DeclareDetail.vue'
 import { useTable } from '~/composables/useTable'
 import { getDeclareList } from '~/api/modules/declare'
 import { timeStampToDate } from '~/composables/timeFormat'
@@ -95,6 +97,15 @@ const handleExport = async () => {
   }
 }
 
+/**
+ * @description: 打开弹窗上传申报记录
+ * @return {*}
+ */
+const declareDetailRef = ref<InstanceType<typeof DeclareDetail> | null>(null)
+const handleDeclare = (row: any) => {
+  declareDetailRef?.value?.openDialog(row)
+}
+
 onMounted(() => {
   tableHeight.value = `${window.innerHeight - 430}px`
 })
@@ -143,10 +154,13 @@ onActivated(() => {
         <el-button type="primary" auto-insert-space @click="search">
           查询
         </el-button>
-        <el-button type="primary" plain auto-insert-space @click="()=>{reset();resetData()}">
+        <el-button type="primary" plain auto-insert-space @click="() => { reset(); resetData() }">
           重置
         </el-button>
-        <el-button type="success" plain auto-insert-space :loading="exportLoading" :disabled="exportLoading" @click="handleExport">
+        <el-button
+          type="success" plain auto-insert-space :loading="exportLoading" :disabled="exportLoading"
+          @click="handleExport"
+        >
           导出申报列表
         </el-button>
       </el-form-item>
@@ -169,11 +183,18 @@ onActivated(() => {
           min-width="180"
         />
         <el-table-column prop="legal_person_phone" show-overflow-tooltip label="法人手机号" align="center" min-width="150" />
-        <el-table-column prop="add_time" show-overflow-tooltip label="添加时间" align="center" min-width="180" :formatter="(row, column, cellValue, index) => timeStampToDate(cellValue * 1000)" />
+        <el-table-column
+          prop="add_time" show-overflow-tooltip label="添加时间" align="center" min-width="180"
+          :formatter="(row, column, cellValue, index) => timeStampToDate(cellValue * 1000)"
+        />
         <el-table-column prop="mark" show-overflow-tooltip label="备注" align="center" min-width="120" />
         <el-table-column label="操作" fixed="right" header-align="center" min-width="200">
           <template #default="scope">
-            <div class="w-full flex items-center justify-center" />
+            <div class="w-full flex items-center justify-center" @click="handleDeclare(scope.row)">
+              <el-button type="success" size="small">
+                上传申报记录
+              </el-button>
+            </div>
           </template>
         </el-table-column>
       </el-table>
@@ -186,6 +207,9 @@ onActivated(() => {
       />
     </div>
   </div>
+
+  <!--添加申报记录弹窗-->
+  <DeclareDetailVue ref="declareDetailRef" @submit="getTableList" />
 </template>
 <style lang="scss" scoped>
 .header-style {
