@@ -2,7 +2,7 @@
  * @Author: qixiaobro
  * @Date: 2022-05-08 22:16:11
  * @LastEditors: qixiaobro
- * @LastEditTime: 2022-05-29 12:26:37
+ * @LastEditTime: 2022-05-30 11:29:25
  * @Description: 用户列表
  * Copyright (c) 2022 by qixiaobro, All Rights Reserved.
 -->
@@ -10,7 +10,7 @@
 import DeclareDetailVue from './components/DeclareDetail.vue'
 import type DeclareDetail from './components/DeclareDetail.vue'
 import { useTable } from '~/composables/useTable'
-import { getDeclareList } from '~/api/modules/declare'
+import { getDeclareList, getDeclareStatistics } from '~/api/modules/declare'
 import { timeStampToDate } from '~/composables/timeFormat'
 
 const tableHeight = ref('auto')
@@ -61,6 +61,25 @@ const resetData = () => {
 }
 
 /**
+ * @description: 获取统计数据
+ * @return {*}
+ */
+const countData = reactive({
+  newAddDeclare: 0,
+  stopDeclare: 0,
+})
+const getStatisticsData = async () => {
+  try {
+    const res = await getDeclareStatistics()
+    countData.newAddDeclare = res[0].count
+    countData.stopDeclare = res[1].count
+  }
+  catch {
+
+  }
+}
+
+/**
  * @description: 查看新增/停止申报列表
  * @return {*}
  */
@@ -108,6 +127,7 @@ const handleDeclare = (row: any) => {
 
 onMounted(() => {
   tableHeight.value = `${window.innerHeight - 430}px`
+  getStatisticsData()
 })
 
 onActivated(() => {
@@ -119,13 +139,13 @@ onActivated(() => {
   <el-row :gutter="20">
     <el-col :span="6">
       <DataCard
-        color="green-600" title="新增申报公司（家）" num="30000" icon="i-carbon:document-add" detail
+        color="green-600" title="新增申报公司（家）" :num="countData.newAddDeclare" icon="i-carbon:document-add" detail
         @click="checkDeclareChange(1)"
       />
     </el-col>
     <el-col :span="6">
       <DataCard
-        color="red-600" title="停止申报公司（家）" num="30000" icon="i-carbon:document-download" detail
+        color="red-600" title="停止申报公司（家）" :num="countData.stopDeclare" icon="i-carbon:document-download" detail
         @click="checkDeclareChange(0)"
       />
     </el-col>

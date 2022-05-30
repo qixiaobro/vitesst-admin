@@ -47,3 +47,11 @@ export const declare = (params?: object): Promise<any> => {
 export const updateDeclareRecord = (params: { id: number; [key: string]: any }): Promise<any> => {
   return http.put(`/user/declaration/${params.id}`, params)
 }
+
+/**
+ * @description: 待申报列表统计
+ * @return {*}
+ */
+export const getDeclareStatistics = (params?: object): Promise<any> => {
+  return http.get('/user/declare_statistics', params)
+}
