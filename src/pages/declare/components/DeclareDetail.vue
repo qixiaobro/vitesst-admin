@@ -60,13 +60,15 @@ onMounted(() => {
   getToken()
 })
 
-const dialogImageUrl = ref('')
-
+const dialogImageUrl = ref<string[]>([])
+const showImageViewer = ref(false)
 const handlePictureCardPreview: UploadProps['onPreview'] = (uploadFile) => {
-  dialogImageUrl.value = uploadFile.url!
-  dialogVisible.value = true
+  dialogImageUrl.value.push(uploadFile.url!)
+  showImageViewer.value = true
 }
-
+const closeImgViewer = () => {
+  showImageViewer.value = false
+}
 /**
  * @description: 保存
  * @return {*}
@@ -154,6 +156,7 @@ watch(dialogVisible, (val) => {
         </el-button>
       </span>
     </template>
+    <el-image-viewer v-if="showImageViewer" :url-list="dialogImageUrl" @close="closeImgViewer" />
   </el-dialog>
 </template>
 

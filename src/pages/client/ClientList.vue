@@ -2,7 +2,7 @@
  * @Author: qixiaobro
  * @Date: 2022-05-08 22:16:11
  * @LastEditors: qixiaobro
- * @LastEditTime: 2022-05-28 16:05:37
+ * @LastEditTime: 2022-05-30 10:27:23
  * @Description: 用户列表
  * Copyright (c) 2022 by qixiaobro, All Rights Reserved.
 -->
@@ -198,7 +198,7 @@ onActivated(() => {
         <el-table-column prop="real_name" label="真实姓名" min-width="120" align="center" />
         <el-table-column prop="company_count" label="公司数（家）" min-width="120" align="center" />
         <el-table-column prop="now_money" label="余额（元）" min-width="120" align="center" />
-        <el-table-column prop="spread_name" label="邀请人" min-width="120" align="center" />
+        <el-table-column prop="spread_phone" label="邀请人" min-width="120" align="center" />
         <el-table-column
           prop="add_time" label="注册时间" min-width="180" align="center"
           :formatter="(row, column, cellValue, index) => timeStampToDate(cellValue * 1000)"

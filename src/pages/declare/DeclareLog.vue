@@ -2,7 +2,7 @@
  * @Author: qixiaobro
  * @Date: 2022-05-08 22:16:11
  * @LastEditors: qixiaobro
- * @LastEditTime: 2022-05-29 14:41:56
+ * @LastEditTime: 2022-05-30 10:19:36
  * @Description: 用户列表
  * Copyright (c) 2022 by qixiaobro, All Rights Reserved.
 -->
@@ -137,10 +137,10 @@ onActivated(() => {
         <el-table-column prop="customer_name" show-overflow-tooltip label="昵称" align="center" min-width="170" />
         <el-table-column prop="customer_phone" show-overflow-tooltip label="客户手机号" align="center" min-width="150" />
         <el-table-column
-          prop="declaration_date" show-overflow-tooltip label="申报日期" align="center" min-width="150"
+          prop="declaration_date" show-overflow-tooltip label="申报日期" align="center" min-width="180"
           :formatter="(row, column, cellValue, index) => timeStampToDate(cellValue * 1000)"
         />
-        <el-table-column prop="img_url" label="申报图片" align="center" min-width="80">
+        <el-table-column prop="img_url" label="申报图片" align="center" min-width="100">
           <template #default="scope">
             <div flex justify-center items-center w-50px h-50px ma>
               <el-image :src="scope.row.img_url[0]" fit="fill" @click="checkImg(scope.row.img_url)" />
@@ -161,7 +161,7 @@ onActivated(() => {
           :formatter="(row, column, cellValue, index) => timeStampToDate(cellValue * 1000)"
         />
         <!-- <el-table-column prop="mark" show-overflow-tooltip label="备注" align="center" min-width="120" /> -->
-        <el-table-column label="操作" fixed="right" min-width="120" align="center">
+        <el-table-column label="操作" fixed="right" min-width="140" align="center">
           <template #default="scope">
             <el-button type="primary" size="small" @click="handleEditLog(scope.row)">
               修改申报记录
