@@ -22,6 +22,7 @@ const selectLoading = ref(false)
 const remoteMethod = async (query: string) => {
   if (query) {
     selectLoading.value = true
+    customerOptions.value = []
     try {
       const res = await getClientList({
         field_name: 'phone',
@@ -66,6 +67,7 @@ const handleSubmit = async () => {
   try {
     loading.value = true
     const formData = new FormData()
+
     formData.append('uid', uid.value)
     formData.append('file', (fileList.value[0].raw as Blob))
     await importCompany(formData)

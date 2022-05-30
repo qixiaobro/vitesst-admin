@@ -52,6 +52,6 @@ export const getCompanyStatistics = (params?: object): Promise<any> => {
  * @description: 导入公司
  * @return {*}
  */
-export const importCompany = (params: FormData | File): Promise<any> => {
-  return http.upload('/company/import', params)
+export const importCompany = (params: object): Promise<any> => {
+  return http.post('/company/import', params)
 }

@@ -2,7 +2,7 @@
  * @Author: qixiaobro
  * @Date: 2022-05-08 22:16:11
  * @LastEditors: qixiaobro
- * @LastEditTime: 2022-05-26 22:27:34
+ * @LastEditTime: 2022-05-30 10:33:01
  * @Description: 用户列表
  * Copyright (c) 2022 by qixiaobro, All Rights Reserved.
 -->
@@ -133,7 +133,7 @@ onActivated(() => {
         <el-table-column prop="customer_name" show-overflow-tooltip label="客户昵称" align="center" min-width="170" />
         <el-table-column prop="customer_phone" show-overflow-tooltip label="客户手机号" align="center" min-width="150" />
         <el-table-column prop="price" show-overflow-tooltip label="充值金额（元）" align="center" min-width="150" />
-        <el-table-column prop="give_price" show-overflow-tooltip label="购买赠送金额（元）" align="center" min-width="150" />
+        <el-table-column prop="give_price" show-overflow-tooltip label="购买赠送金额（元）" align="center" min-width="180" />
         <el-table-column prop="pay_type_name" show-overflow-tooltip label="支付方式" align="center" min-width="150" />
         <el-table-column prop="paid" show-overflow-tooltip label="支付状态" align="center" min-width="120">
           <template #default="scope">
