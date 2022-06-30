@@ -3,6 +3,7 @@ export namespace Table {
     page: number
     limit: number
     count: number
+    size: number[]
   }
   export interface TableStateProps {
     tableData: any[]

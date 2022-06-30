@@ -1,8 +1,5 @@
 <script lang="ts" setup>
 import type { FormInstance, FormRules } from 'element-plus'
-import { getBlobCaptcha, userInfo, userLogin } from '~/api/modules/user'
-import type { Login } from '~/api/interface'
-// import { UseUserStore } from '~/store/modules/user'
 
 const router = useRouter()
 
@@ -16,7 +13,7 @@ const loginRules = reactive<FormRules>({
 })
 
 // 登录表单数据
-const loginForm = reactive<Login.ReqLoginForm>({
+const loginForm = reactive({
   account: '',
   pwd: '',
   imgCode: '',
@@ -27,7 +24,7 @@ const getCaptcha = async () => {
   if (imgLoading.value)
     return
   imgLoading.value = true
-  const res = await getBlobCaptcha()
+  const res = await getBlobCaptchaApi()
   captcha.value = window.URL.createObjectURL(res as unknown as Blob)
   imgLoading.value = false
 }
@@ -35,17 +32,6 @@ const getCaptcha = async () => {
 onMounted(() => {
   getCaptcha()
 })
-
-// const userStore = UseUserStore()
-// const getUserInfo = async () => {
-//   try {
-//     const res = await userInfo()
-//     // userStore.setUserInfo(res.data)
-//   }
-//   catch {
-
-//   }
-// }
 
 const loading = ref(false)
 const handleLogin = (formEl: FormInstance | undefined) => {
@@ -56,7 +42,7 @@ const handleLogin = (formEl: FormInstance | undefined) => {
       return
     try {
       loading.value = true
-      const res = await userLogin({
+      const res = await userLoginApi({
         account: loginForm.account,
         pwd: loginForm.pwd,
         imgCode: loginForm.imgCode,
@@ -64,7 +50,6 @@ const handleLogin = (formEl: FormInstance | undefined) => {
       sessionStorage.setItem('token', res.token)
       ElMessage.success('登录成功')
       loading.value = false
-      // getUserInfo()
       router.push('/')
     }
     catch (err: any) {
@@ -74,8 +59,8 @@ const handleLogin = (formEl: FormInstance | undefined) => {
     }
   })
 }
-
 </script>
+
 <template>
   <div class="page-login" flex items-center justify-center>
     <div class="p-6 sm:p-12" bg-white rounded>
@@ -132,6 +117,7 @@ const handleLogin = (formEl: FormInstance | undefined) => {
     </div>
   </div>
 </template>
+
 <style lang="scss" scoped>
 .page-login {
   width: 100%;

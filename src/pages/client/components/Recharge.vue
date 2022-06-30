@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import type { FormInstance, FormRules } from 'element-plus'
-import { getGiveBalance, rechargeClientBalance } from '~/api/modules/client'
 const emit = defineEmits(['submit'])
 
 const dialogVisible = ref(false)
@@ -14,24 +13,6 @@ const rules = reactive<FormRules>({
   price: [
     { required: true, message: '请输入充值金额', trigger: 'blur' },
   ],
-})
-
-/**
- * @description: 获取赠送金额项目
- * @return {*}
- */
-const quickSelectProject = ref<QuickSelectProject[]>([])
-const getGiveBalanceItem = async () => {
-  try {
-    const res = await getGiveBalance()
-    quickSelectProject.value = res.recharge_quota
-  }
-  catch (err) {
-  }
-}
-
-onMounted(() => {
-  getGiveBalanceItem()
 })
 
 /**
@@ -67,30 +48,6 @@ watch(dialogVisible, (val) => {
 })
 
 /**
- * @description: 匹配赠送金额
- * @return {*}
- */
-interface QuickSelectProject {
-  id: number
-  price: string
-  give_money: string
-}
-watch(form, (val) => {
-  if (val.price) {
-    console.log(quickSelectProject.value)
-
-    const selectProject: (QuickSelectProject | undefined) = quickSelectProject.value.find((item: QuickSelectProject) => item.price === val.price)
-    console.log(val, selectProject)
-
-    if (selectProject)
-      form.give_price = selectProject.give_money
-
-    else
-      form.give_price = ''
-  }
-}, { immediate: true })
-
-/**
  * @description: 提交
  * @return {*}
  */
@@ -100,7 +57,7 @@ const handleSubmit = async () => {
     if (valid) {
       try {
         loading.value = true
-        await rechargeClientBalance({
+        await rechargeClientBalanceApi({
           phone: clientInfo.phone,
           price: form.price,
           give_price: form.give_price,
@@ -118,7 +75,6 @@ const handleSubmit = async () => {
     }
   })
 }
-
 </script>
 
 <template>
