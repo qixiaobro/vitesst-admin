@@ -42,20 +42,19 @@ const handleLogin = (formEl: FormInstance | undefined) => {
       return
     try {
       loading.value = true
-      const res = await userLoginApi({
+      const { data } = await userLoginApi({
         account: loginForm.account,
         pwd: loginForm.pwd,
         imgCode: loginForm.imgCode,
       })
-      sessionStorage.setItem('token', res.token)
+      sessionStorage.setItem('token', data.token)
       ElMessage.success('登录成功')
       loading.value = false
       router.push('/')
     }
-    catch (err: any) {
+    catch {
       loading.value = false
       getCaptcha()
-      ElMessage.error(err.msg)
     }
   })
 }
