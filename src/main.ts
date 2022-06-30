@@ -1,23 +1,14 @@
-/*
- * @Author: qixiaobro
- * @Date: 2022-05-05 15:51:20
- * @LastEditors: qixiaobro
- * @LastEditTime: 2022-05-09 23:57:54
- * @Description: main.ts
- * Copyright (c) 2022 by qixiaobro, All Rights Reserved.
- */
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import piniaPersist from 'pinia-plugin-persist'
 import App from './App.vue'
 import router from './router'
 
-// Element icons
-
-import '@unocss/reset/normalize.css'
+// import '@unocss/reset/normalize.css'
 import './styles/main.css'
 import 'uno.css'
 
-import './styles/element/index.scss'
+// If you want to use ElMessage, import it.
+import 'element-plus/theme-chalk/src/message.scss'
 
 const pinia = createPinia()
 pinia.use(piniaPersist)

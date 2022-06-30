@@ -89,7 +89,8 @@ export default defineConfig({
       // 全局引入了 scss 的文件
       scss: {
         additionalData: `
-        @import "~/styles/variables.scss";
+        @use "~/styles/variables.scss" as *;
+        @use "~/styles/element/index.scss" as *;
       `,
         javascriptEnabled: true,
       },
