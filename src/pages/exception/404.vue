@@ -1,11 +1,3 @@
-<!--
- * @Author: qixiaobro
- * @Date: 2022-05-06 10:00:36
- * @LastEditors: qixiaobro
- * @LastEditTime: 2022-05-06 10:00:44
- * @Description: 404页面
- * Copyright (c) 2022 by qixiaobro, All Rights Reserved.
--->
 <script setup lang="ts">
 const router = useRouter()
 const goBack = () => {
