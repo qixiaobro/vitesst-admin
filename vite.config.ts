@@ -31,12 +31,7 @@ export default defineConfig({
         'vue/macros',
         'vue-router',
         '@vueuse/core',
-        {
-          pinia: [
-            'defineStore',
-            'createPinia',
-          ],
-        },
+        'pinia',
       ],
       dts: true,
       resolvers: [
@@ -45,6 +40,10 @@ export default defineConfig({
         IconsResolver({
           prefix: 'Icon',
         })],
+      dirs: [
+        './src/composables',
+        './src/api',
+      ],
     }),
 
     // https://github.com/antfu/vite-plugin-components

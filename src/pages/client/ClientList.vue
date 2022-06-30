@@ -2,18 +2,16 @@
  * @Author: qixiaobro
  * @Date: 2022-05-08 22:16:11
  * @LastEditors: qixiaobro
- * @LastEditTime: 2022-05-30 10:27:23
+ * @LastEditTime: 2022-06-30 23:19:26
  * @Description: 用户列表
  * Copyright (c) 2022 by qixiaobro, All Rights Reserved.
 -->
 <script lang="ts" setup name="clientList">
-// eslint-disable-next-line @typescript-eslint/consistent-type-imports
 import EditClient from './components/EditClient.vue'
 import type Recharge from './components/Recharge.vue'
 import RechargeVue from './components/Recharge.vue'
-import { getClientList, getClientStatistics } from '~/api/modules/client'
-import { useTable } from '~/composables/useTable'
-import { timeStampToDate } from '~/composables/timeFormat'
+
+const { useTimeStampToDate } = useTimeFormat()
 
 const tableHeight = ref('auto')
 onMounted(() => {
@@ -42,7 +40,7 @@ const options = [
   },
 ]
 
-const { tableData, loading, pageable, searchParam, search, getTableList, reset, handleSizeChange, handleCurrentChange } = useTable(getClientList)
+const { tableData, loading, pageable, searchParam, search, getTableList, reset, handleSizeChange, handleCurrentChange } = useTable(getClientListApi)
 
 /**
  * @description: 监听时间查询
@@ -121,11 +119,11 @@ const todayNewClient = ref(0)
 const todayNewMoney = ref(0)
 const getClientCountData = async () => {
   try {
-    const res = await getClientStatistics()
-    totalClient.value = res[0].count
-    totalMoney.value = res[1].count
-    todayNewClient.value = res[2].count
-    todayNewMoney.value = res[3].count
+    const { data } = await getClientStatisticsApi()
+    totalClient.value = data[0].count
+    totalMoney.value = data[1].count
+    todayNewClient.value = data[2].count
+    todayNewMoney.value = data[3].count
   }
   catch (e: any) {
     ElMessage.error(e.msg || e.message || '获取统计数据失败')
@@ -136,8 +134,8 @@ onActivated(() => {
   getTableList()
   getClientCountData()
 })
-
 </script>
+
 <template>
   <el-row :gutter="20">
     <el-col :span="6">
@@ -154,7 +152,7 @@ onActivated(() => {
     </el-col>
   </el-row>
   <div class="w-full rounded shadow-xl bg-white mt-5 p-5 box-border">
-    <!--搜索表单-->
+    <!-- 搜索表单 -->
     <el-form ref="queryFormRef" :inline="true" :model="searchParam">
       <el-form-item label="搜索" prop="field_name" style="margin-right:0">
         <el-select v-model="searchParam.field_name" style="width:125px">
@@ -167,12 +165,6 @@ onActivated(() => {
           @change="search"
         />
       </el-form-item>
-      <el-form-item label="注册时间" prop="data">
-        <el-date-picker
-          v-model="data" type="daterange" range-separator="-" start-placeholder="开始时间"
-          value-format="YYYY/MM/DD" end-placeholder="结束时间" clearable style="width:250px"
-        />
-      </el-form-item>
       <el-form-item>
         <el-button type="primary" auto-insert-space @click="search">
           查询
@@ -182,7 +174,7 @@ onActivated(() => {
         </el-button>
       </el-form-item>
     </el-form>
-    <!--数据表格-->
+    <!-- 数据表格 -->
     <div class="data-table w-full">
       <el-table
         v-loading="loading" w-full :data="tableData" stripe size="large" highlight-current-row
@@ -201,7 +193,7 @@ onActivated(() => {
         <el-table-column prop="spread_phone" label="邀请人" min-width="120" align="center" />
         <el-table-column
           prop="add_time" label="注册时间" min-width="180" align="center"
-          :formatter="(row, column, cellValue, index) => timeStampToDate(cellValue * 1000)"
+          :formatter="(row, column, cellValue, index) => useTimeStampToDate(cellValue * 1000)"
         />
         <el-table-column prop="mark" label="备注" show-overflow-tooltip min-width="120" />
         <el-table-column label="操作" fixed="right" align="center" min-width="250">
@@ -228,15 +220,16 @@ onActivated(() => {
     </div>
   </div>
 
-  <!--编辑客户信息弹窗-->
+  <!-- 编辑客户信息弹窗 -->
   <EditClient
     :id="clientInfo.uid" ref="editClientRef" :nickname="clientInfo.nickname" :avatar="clientInfo.avatar"
     :phone="clientInfo.phone" :real-name="clientInfo.real_name" :mark="clientInfo.mark" @submit="getTableList"
   />
 
-  <!--充值弹窗-->
+  <!-- 充值弹窗 -->
   <RechargeVue ref="rechargeRef" @submit="getTableList" />
 </template>
+
 <style lang="scss" scoped>
 .header-style {
   background: red;

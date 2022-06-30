@@ -2,14 +2,12 @@
  * @Author: qixiaobro
  * @Date: 2022-05-08 22:16:11
  * @LastEditors: qixiaobro
- * @LastEditTime: 2022-05-28 15:45:14
+ * @LastEditTime: 2022-06-30 23:19:45
  * @Description: 用户列表
  * Copyright (c) 2022 by qixiaobro, All Rights Reserved.
 -->
 <script lang="ts" setup name="clientList">
-import { useTable } from '~/composables/useTable'
-import { getBalanceChangeList } from '~/api/modules/client'
-import { timeStampToDate } from '~/composables/timeFormat'
+const { useTimeStampToDate } = useTimeFormat()
 
 const tableHeight = ref('auto')
 
@@ -17,7 +15,7 @@ const route = useRoute()
 
 const { phone } = route.query
 
-const { tableData, loading, pageable, searchParam, initSearchParam, search, getTableList, reset, handleSizeChange, handleCurrentChange } = useTable(getBalanceChangeList)
+const { tableData, loading, pageable, searchParam, initSearchParam, search, getTableList, reset, handleSizeChange, handleCurrentChange } = useTable(getBalanceChangeListApi)
 
 searchParam.value.keyword = phone
 initSearchParam.value.keyword = phone
@@ -49,11 +47,11 @@ onMounted(() => {
   tableHeight.value = `${window.innerHeight - 290}px`
   getTableList()
 })
-
 </script>
+
 <template>
   <div class="w-full rounded shadow-xl bg-white p-5 box-border">
-    <!--搜索表单-->
+    <!-- 搜索表单 -->
     <el-form ref="queryFormRef" :inline="true" :model="searchParam">
       <el-form-item label="变更时间" prop="data">
         <el-date-picker
@@ -65,12 +63,12 @@ onMounted(() => {
         <el-button type="primary" auto-insert-space @click="search">
           查询
         </el-button>
-        <el-button type="primary" plain auto-insert-space @click="()=>{reset();resetData()}">
+        <el-button type="primary" plain auto-insert-space @click="() => { reset();resetData() }">
           重置
         </el-button>
       </el-form-item>
     </el-form>
-    <!--数据表格-->
+    <!-- 数据表格 -->
     <div class="data-table w-full">
       <el-table
         v-loading="loading" w-full :data="tableData" stripe size="large" highlight-current-row
@@ -81,7 +79,7 @@ onMounted(() => {
         <el-table-column prop="title" show-overflow-tooltip label="变更项目" align="center" min-width="150" />
         <el-table-column prop="number" show-overflow-tooltip label="变更金额（元）" align="center" min-width="150" />
         <el-table-column prop="balance" show-overflow-tooltip label="变更后余额（元）" align="center" min-width="120" />
-        <el-table-column prop="add_time" show-overflow-tooltip label="变更时间" align="center" min-width="180" :formatter="(row, column, cellValue, index) => timeStampToDate(cellValue * 1000)" />
+        <el-table-column prop="add_time" show-overflow-tooltip label="变更时间" align="center" min-width="180" :formatter="(row, column, cellValue, index) => useTimeStampToDate(cellValue * 1000)" />
         <el-table-column prop="mark" show-overflow-tooltip label="备注" align="center" min-width="120" />
       </el-table>
     </div>
@@ -94,6 +92,7 @@ onMounted(() => {
     </div>
   </div>
 </template>
+
 <style lang="scss" scoped>
 .header-style {
   background: red;

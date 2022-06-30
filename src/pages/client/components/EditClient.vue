@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { editClientApi } from '~/api/modules/client'
 interface Props {
   id: number
   nickname: string
@@ -60,7 +59,6 @@ const handleSubmit = async () => {
     ElMessage.error(e.msg || e.message || '编辑失败')
   }
 }
-
 </script>
 
 <template>

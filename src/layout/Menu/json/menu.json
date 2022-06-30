@@ -10,37 +10,5 @@
     "icon": "Avatar",
     "title": "客户列表",
     "path": "/client/clientList"
-  },
-  {
-    "id": "3",
-    "icon": "Discount",
-    "title": "公司列表",
-    "path": "/company/companyList"
-  },
-  {
-    "id": "4",
-    "icon": "Collection",
-    "title": "申报管理",
-    "path": "/declare/declareList",
-    "children": [
-      {
-        "id": "41",
-        "path": "/declare/declareList",
-        "title": "待申报列表",
-        "icon": "Document"
-      },
-      {
-        "id": "42",
-        "path": "/declare/declareLog",
-        "title": "申报记录",
-        "icon": "DocumentChecked"
-      }
-    ]
-  },
-  {
-    "id": "5",
-    "icon": "List",
-    "title": "订单列表",
-    "path": "/order/orderList"
   }
 ]
