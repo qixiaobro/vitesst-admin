@@ -1,11 +1,3 @@
-<!--
- * @Author: qixiaobro
- * @Date: 2022-05-10 18:10:19
- * @LastEditors: qixiaobro
- * @LastEditTime: 2022-05-27 17:51:37
- * @Description: 数据卡片
- * Copyright (c) 2022 by qixiaobro, All Rights Reserved.
--->
 <script lang="ts" setup name="clientList">
 interface Props {
   color: string
@@ -21,8 +13,8 @@ withDefaults(defineProps<Props>(), {
   icon: '',
   detail: false,
 })
-
 </script>
+
 <template>
   <div class="w-full h-30 rounded shadow-xl bg-white flex items-center p-25px box-border">
     <div
@@ -55,6 +47,7 @@ withDefaults(defineProps<Props>(), {
     </div>
   </div>
 </template>
+
 <style scoped>
 .color1 {
   color: 'text-indigo-600';

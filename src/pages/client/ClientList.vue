@@ -1,11 +1,3 @@
-<!--
- * @Author: qixiaobro
- * @Date: 2022-05-08 22:16:11
- * @LastEditors: qixiaobro
- * @LastEditTime: 2022-06-30 23:19:26
- * @Description: 用户列表
- * Copyright (c) 2022 by qixiaobro, All Rights Reserved.
--->
 <script lang="ts" setup name="clientList">
 import EditClient from './components/EditClient.vue'
 import type Recharge from './components/Recharge.vue'
