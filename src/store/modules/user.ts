@@ -1,6 +1,4 @@
-import { defineStore } from 'pinia'
 import type { UserState } from '../interface'
-import piniaPersistConfig from '~/config/piniaPersist'
 
 export const UseUserStore = defineStore({
   id: 'UseUserStore',
@@ -14,5 +12,14 @@ export const UseUserStore = defineStore({
   actions: {
 
   },
-  persist: piniaPersistConfig('UseUserStore'),
+  persist: {
+    enabled: true,
+    strategies: [
+      {
+        key: 'UserState',
+        storage: sessionStorage,
+        paths: ['id', 'account', 'head_pic', 'roles'],
+      },
+    ],
+  },
 })

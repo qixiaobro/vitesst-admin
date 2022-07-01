@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import InfoDialog from './components/infoDialog.vue'
-import PasswordDialog from './components/passwordDialog.vue'
 import Breadcrumb from './components/Breadcrumb.vue'
 import { UseMenuStore } from '~/store/modules/menu'
+import { UseTabsStore } from '~/store/modules/tabs'
 
 const menuStore = UseMenuStore()
+const tabStore = UseTabsStore()
+
 const isCollapse = computed((): boolean => menuStore.isCollapse)
 const router = useRouter()
 
@@ -15,28 +16,16 @@ const logout = () => {
     cancelButtonText: 'Cancel',
     type: 'warning',
   }).then(() => {
-    sessionStorage.removeItem('token')
+    sessionStorage.clear()
     ElMessage({
       type: 'success',
       message: '退出登录成功！',
     })
     router.push('/login')
+    tabStore.$reset()
+    menuStore.$reset()
+    window.location.reload()
   })
-}
-
-interface DialogExpose {
-  openDialog: () => void
-}
-
-const infoRef = ref<null | DialogExpose>(null)
-
-const passwordRef = ref<null | DialogExpose>(null)
-
-// openDialog
-const openDialog = (refName: string) => {
-  if (refName == 'infoRef')
-    return infoRef.value?.openDialog()
-  passwordRef.value?.openDialog()
 }
 </script>
 
@@ -61,22 +50,12 @@ const openDialog = (refName: string) => {
         <div w-40px h-40px i-carbon-user-avatar-filled />
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item @click.native="openDialog('infoRef')">
-              个人资料
-            </el-dropdown-item>
-            <el-dropdown-item @click.native="openDialog('passwordRef')">
-              修改密码
-            </el-dropdown-item>
-            <el-dropdown-item divided @click.native="logout">
+            <el-dropdown-item @click="logout">
               退出登录
             </el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
     </div>
-    <!-- infoDialog -->
-    <InfoDialog ref="infoRef" />
-    <!-- passwordDialog -->
-    <PasswordDialog ref="passwordRef" />
   </div>
 </template>

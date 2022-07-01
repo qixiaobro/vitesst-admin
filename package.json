@@ -23,7 +23,8 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.25.2",
-    "@iconify-json/carbon": "^1.1.6",
+    "@iconify/json": "^2.1.70",
+    "@iconify/vue": "^3.2.1",
     "@types/node": "^18.0.0",
     "@unocss/reset": "^0.42.0",
     "@vitejs/plugin-vue": "^2.3.3",
