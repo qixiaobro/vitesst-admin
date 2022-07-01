@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TabsPaneContext } from 'element-plus'
+import type { TabPanelName, TabsPaneContext } from 'element-plus'
 import { UseTabsStore } from '~/store/modules/tabs'
 
 const tabStore = UseTabsStore()
@@ -19,13 +19,13 @@ const router = useRouter()
 watch(
   () => route.path,
   () => {
-    const params: Menu.MenuOptions = {
-      title: route.meta.title as string,
+    const params: Menu.TabOptions = {
+      title: route.meta.title,
       path: route.path,
       fullPath: route.fullPath,
+      icon: route.meta.icon,
       close: true,
     }
-    // debugger
     tabStore.addTabs(params)
   },
   {
@@ -40,8 +40,9 @@ const tabClick = (tabItem: TabsPaneContext) => {
 }
 
 // Remove Tab
-const removeTab = (activeTabPath: string) => {
-  tabStore.removeTabs(activeTabPath)
+const removeTab = (targetName: TabPanelName | undefined, action: 'remove' | 'add') => {
+  if (action === 'remove')
+    tabStore.removeTabs(targetName as string)
 }
 
 // Close Current
@@ -66,7 +67,7 @@ const closeAllTab = () => {
 <template>
   <div class="tabs-box">
     <div class="tabs-menu">
-      <el-tabs v-model="tabsMenuValue" type="card" @tab-click="tabClick" @tab-remove="removeTab">
+      <el-tabs v-model="tabsMenuValue" type="card" @tab-click="tabClick" @edit="removeTab">
         <el-tab-pane
           v-for="item in tabsMenuList"
           :key="item.fullPath"

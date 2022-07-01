@@ -7,7 +7,7 @@ export interface MenuState {
 /* TabsStore */
 export interface TabsState {
   tabsMenuValue: string
-  tabsMenuList: Menu.MenuOptions[]
+  tabsMenuList: Menu.TabOptions[]
 }
 
 export interface AuthButtonsState {

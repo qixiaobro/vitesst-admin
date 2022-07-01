@@ -1,6 +1,9 @@
 <script lang="ts" setup>
 import type { FormInstance, FormRules } from 'element-plus'
+import { UseMenuStore } from '~/store/modules/menu'
+import { generateMenu, routes } from '~/router'
 
+const menuStore = UseMenuStore()
 const router = useRouter()
 
 const captcha = ref('')
@@ -48,6 +51,8 @@ const handleLogin = (formEl: FormInstance | undefined) => {
         imgCode: loginForm.imgCode,
       })
       sessionStorage.setItem('token', data.token)
+      sessionStorage.setItem('role', JSON.stringify(['admin']))
+      menuStore.setMenuList(generateMenu(routes))
       ElMessage.success('登录成功')
       loading.value = false
       router.push('/')

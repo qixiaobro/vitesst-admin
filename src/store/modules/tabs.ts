@@ -1,30 +1,22 @@
-import { defineStore } from 'pinia'
 import type { TabPaneProps } from 'element-plus'
 import type { TabsState } from '../interface'
-import piniaPersistConfig from '~/config/piniaPersist'
 import { HOME_URL, TABS_BLACK_LIST } from '~/config/config'
-import router from '~/router/index'
+import { router } from '~/router/index'
 
 export const UseTabsStore = defineStore({
   id: 'UseTabsStore',
   state: (): TabsState => ({
     tabsMenuValue: HOME_URL,
-    tabsMenuList: [{ title: '首页', path: HOME_URL, fullPath: '/', icon: 'home-filled', close: false }],
+    tabsMenuList: [{ path: HOME_URL, fullPath: '/', title: '首页', close: false }],
   }),
   getters: {},
   actions: {
     // Add Tabs
-    async addTabs(tabItem: Menu.MenuOptions) {
+    async addTabs(tabItem: Menu.TabOptions) {
       // not add tabs black list
 
       if (TABS_BLACK_LIST.includes(tabItem.path))
         return
-      const tabInfo: Menu.MenuOptions = {
-        title: tabItem.title,
-        path: tabItem.path,
-        fullPath: tabItem.fullPath,
-        close: tabItem.close,
-      }
       // 同一个路由，但是query参数不一样，需要关闭之前的tab
       for (let i = 0; i < this.tabsMenuList.length; i++) {
         if (this.tabsMenuList[i].path === tabItem.path && this.tabsMenuList[i].fullPath !== tabItem.fullPath) {
@@ -33,10 +25,9 @@ export const UseTabsStore = defineStore({
         }
       }
       if (this.tabsMenuList.every(item => item.path !== tabItem.path))
-        this.tabsMenuList.push(tabInfo)
+        this.tabsMenuList.push(tabItem)
 
       this.setTabsMenuValue(tabItem.fullPath)
-      // router.push(tabItem.fullPath)
     },
     // Remove Tabs
     async removeTabs(tabPath: string) {
@@ -68,7 +59,7 @@ export const UseTabsStore = defineStore({
       this.tabsMenuValue = tabsMenuValue
     },
     // Set TabsMenuList
-    async setTabsMenuList(tabsMenuList: Menu.MenuOptions[]) {
+    async setTabsMenuList(tabsMenuList: Menu.TabOptions[]) {
       this.tabsMenuList = tabsMenuList
     },
     // Close MultipleTab
@@ -83,5 +74,14 @@ export const UseTabsStore = defineStore({
       this.tabsMenuValue = HOME_URL
     },
   },
-  persist: piniaPersistConfig('UseTabsStore'),
+  persist: {
+    enabled: true,
+    strategies: [
+      {
+        key: 'TabsState',
+        storage: sessionStorage,
+        paths: ['tabsMenuValue', 'tabsMenuList'],
+      },
+    ],
+  },
 })

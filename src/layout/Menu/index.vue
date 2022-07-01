@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import Logo from './components/Logo.vue'
 import SubItem from './components/SubItem.vue'
-import menuListJson from './json/menu.json'
 import { UseMenuStore } from '~/store/modules/menu'
 
 const route = useRoute()
 const menuStore = UseMenuStore()
 
-menuStore.setMenuList(menuListJson)
+// menuStore.setMenuList(menuListJson)
 const activeMenu = computed((): string => route.path)
 const isCollapse = computed((): boolean => menuStore.isCollapse)
 const menuList = computed((): Menu.MenuOptions[] => menuStore.menuList)

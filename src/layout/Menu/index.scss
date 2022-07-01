@@ -103,7 +103,7 @@
   .el-menu-item {
     height: 40px;
     margin-bottom: 4px;
-    padding-left: 12px;
+    // padding-left: 12px;
     &.is-active {
       background-color: #f2f3f5;
       border-radius: 4px;
@@ -112,26 +112,26 @@
       border-radius: 4px;
     }
     [class^="el-icon"] {
-      margin-right: 16px;
+      // margin-right: 16px;
     }
   }
   .el-sub-menu {
     :deep(.el-sub-menu__title) {
       margin-bottom: 4px;
-      padding-left: 12px;
+      // padding-left: 12px;
       [class^="el-icon"] {
-        margin-right: 16px;
+        // margin-right: 16px;
       }
       &:hover {
         border-radius: 4px;
       }
     }
     .el-menu-item {
-      padding-left: 56px;
+      // padding-left: 56px;
     }
   }
   .el-menu--collapse {
-    margin-left: 4px;
+    // margin-left: 4px;
     width: 40px;
     .el-menu-item {
       :deep(.el-menu-tooltip__trigger) {
@@ -149,7 +149,7 @@
     .el-menu-item {
       background-color: #20222a;
       i {
-        margin-right: 5px;
+        // margin-right: 5px;
       }
       i,
       span {
