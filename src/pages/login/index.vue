@@ -49,13 +49,13 @@ const handleLogin = (formEl: FormInstance | undefined) => {
       })
       sessionStorage.setItem('token', data.token)
       sessionStorage.setItem('role', JSON.stringify(['admin']))
-      // menuStore.asyncGenerateMenu()
       ElMessage.success('登录成功')
       loading.value = false
       router.push('/')
     }
     catch {
       loading.value = false
+      loginForm.imgCode = ''
       getCaptcha()
     }
   })
@@ -75,33 +75,25 @@ const handleLogin = (formEl: FormInstance | undefined) => {
               <el-form-item prop="account">
                 <el-input v-model="loginForm.account" placeholder="用户名">
                   <template #prefix>
-                    <el-icon class="el-input__icon">
-                      <user />
-                    </el-icon>
+                    <i-ep:user />
                   </template>
                 </el-input>
               </el-form-item>
               <el-form-item prop="pwd">
                 <el-input v-model="loginForm.pwd" type="password" show-password placeholder="密码" @keyup.enter="handleLogin(loginFormRef)">
                   <template #prefix>
-                    <el-icon class="el-input__icon">
-                      <lock />
-                    </el-icon>
+                    <i-ep:lock />
                   </template>
                 </el-input>
               </el-form-item>
               <el-form-item prop="imgCode">
                 <el-input v-model="loginForm.imgCode" placeholder="图形验证码" style="width:218px" @keyup.enter="handleLogin(loginFormRef)">
                   <template #prefix>
-                    <el-icon class="el-input__icon">
-                      <Picture />
-                    </el-icon>
+                    <i-ep:picture />
                   </template>
                 </el-input>
-                <div w-100px h-38px border rounded border-gray-300 overflow-hidden>
-                  <el-icon v-if="imgLoading" class="is-loading" color="#409EFF">
-                    <Loading />
-                  </el-icon>
+                <div w-100px h-38px border rounded border-gray-300 overflow-hidden flex justify-center items-center>
+                  <i-ep:loading v-if="imgLoading" class="is-loading el-icon color-[#409EFF] " />
                   <img v-else cursor-pointer :src="captcha" style="width: 100px; height: 38px" @click="getCaptcha">
                 </div>
               </el-form-item>
