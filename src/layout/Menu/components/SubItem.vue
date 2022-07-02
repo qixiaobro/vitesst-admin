@@ -14,7 +14,7 @@ const generatePath = (path: string) => {
   return path
 }
 function renderIcon(icon: string) {
-  return () => h(Icon, { icon })
+  return () => h(Icon, { icon, class: 'text-18px' })
 }
 </script>
 
