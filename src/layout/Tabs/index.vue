@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { TabPanelName, TabsPaneContext } from 'element-plus'
-import { UseTabsStore } from '~/store/modules/tabs'
 
 const tabStore = UseTabsStore()
 const tabsMenuList = computed(() => tabStore.tabsMenuList)

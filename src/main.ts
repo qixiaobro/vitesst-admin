@@ -1,6 +1,5 @@
 import piniaPersist from 'pinia-plugin-persist'
 import App from './App.vue'
-import { router } from './router'
 
 // import '@unocss/reset/normalize.css'
 import './styles/main.css'

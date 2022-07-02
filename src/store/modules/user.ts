@@ -1,4 +1,4 @@
-import type { UserState } from '../interface'
+import type { UserState } from '../types'
 
 export const UseUserStore = defineStore({
   id: 'UseUserStore',

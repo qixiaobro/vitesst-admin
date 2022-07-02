@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import Breadcrumb from './components/Breadcrumb.vue'
-import { UseMenuStore } from '~/store/modules/menu'
-import { UseTabsStore } from '~/store/modules/tabs'
 
 const menuStore = UseMenuStore()
 const tabStore = UseTabsStore()
@@ -16,15 +14,17 @@ const logout = () => {
     cancelButtonText: 'Cancel',
     type: 'warning',
   }).then(() => {
-    sessionStorage.clear()
+    // sessionStorage.clear()
+    sessionStorage.removeItem('token')
+    sessionStorage.removeItem('role')
     ElMessage({
       type: 'success',
       message: '退出登录成功！',
     })
     router.push('/login')
-    tabStore.$reset()
-    menuStore.$reset()
-    window.location.reload()
+    // tabStore.$reset()
+    // menuStore.$reset()
+    // window.location.reload()
   })
 }
 </script>

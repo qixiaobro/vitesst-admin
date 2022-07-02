@@ -1,4 +1,4 @@
-import type { MenuState } from '../interface'
+import type { MenuState } from '../types'
 
 export const UseMenuStore = defineStore({
   id: 'UseMenuStore',

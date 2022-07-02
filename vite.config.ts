@@ -43,8 +43,10 @@ export default defineConfig({
         ElementPlusResolver(),
       ],
       dirs: [
-        './src/composables',
+        './src/composables/modules',
         './src/api',
+        './src/router',
+        './src/store/modules',
       ],
     }),
 

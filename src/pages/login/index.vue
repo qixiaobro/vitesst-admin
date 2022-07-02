@@ -1,7 +1,5 @@
 <script lang="ts" setup>
 import type { FormInstance, FormRules } from 'element-plus'
-import { UseMenuStore } from '~/store/modules/menu'
-import { generateMenu, routes } from '~/router'
 
 const menuStore = UseMenuStore()
 const router = useRouter()

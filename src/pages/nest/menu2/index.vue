@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { UseMenuStore } from '~/store/modules/menu'
 const menuStore = UseMenuStore()
 const reset = () => {
   menuStore.setMenuList([])

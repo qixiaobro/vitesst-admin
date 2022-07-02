@@ -1,7 +1,6 @@
 import type { TabPaneProps } from 'element-plus'
-import type { TabsState } from '../interface'
+import type { TabsState } from '../types'
 import { HOME_URL, TABS_BLACK_LIST } from '~/config/config'
-import { router } from '~/router/index'
 
 export const UseTabsStore = defineStore({
   id: 'UseTabsStore',
