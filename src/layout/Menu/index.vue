@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import Logo from './components/Logo.vue'
 import SubItem from './components/SubItem.vue'
-import { UseMenuStore } from '~/store/modules/menu'
 
 const route = useRoute()
 const menuStore = UseMenuStore()

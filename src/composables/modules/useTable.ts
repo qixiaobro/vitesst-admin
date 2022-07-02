@@ -1,4 +1,4 @@
-import type { Table } from './interface'
+import type { Table } from '../types'
 
 /**
  * @description table 页面操作方法封装
