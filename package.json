@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.0.6",
+    "@iconify/json": "^2.1.70",
     "@vueuse/core": "^8.7.5",
     "axios": "^0.27.2",
     "element-plus": "^2.2.6",
@@ -23,7 +24,8 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.25.2",
-    "@iconify/json": "^2.1.70",
+    "@iconify-json/ep": "^1.1.5",
+    "@iconify-json/zondicons": "^1.1.2",
     "@iconify/vue": "^3.2.1",
     "@types/node": "^18.0.0",
     "@unocss/reset": "^0.42.0",
