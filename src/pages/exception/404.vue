@@ -2,7 +2,7 @@
 const router = useRouter()
 const goBack = () => {
   router.push({
-    name: 'home',
+    path: '/',
   })
 }
 </script>
