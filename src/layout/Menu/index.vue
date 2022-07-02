@@ -32,8 +32,7 @@ listeningWindow()
     <Logo :is-collapse="isCollapse" />
     <div class="menu-box">
       <el-menu
-        :default-active="activeMenu" :router="true" :collapse="isCollapse" :collapse-transition="false"
-        :unique-opened="true" active-text-color="#409EFF" text-color="#6B7280"
+        :default-active="activeMenu" :router="true" :collapse="isCollapse" :collapse-transition="false" active-text-color="#409EFF" text-color="#6B7280"
       >
         <SubItem :menu-list="menuList" />
       </el-menu>
