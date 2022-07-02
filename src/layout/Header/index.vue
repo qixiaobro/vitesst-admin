@@ -36,9 +36,7 @@ const logout = () => {
         text-gray-400 p-4px flex items-center justify-center bg-gray-100 rounded-sm cursor-pointer
         hover:text-blue-400 hover:bg-gray-200 mr-5 @click="menuStore.setCollapse()"
       >
-        <el-icon class="collapse-icon" text-16px>
-          <component :is="isCollapse ? 'expand' : 'fold'" />
-        </el-icon>
+        <div :class="isCollapse ? 'i-ep-expand' : 'i-ep-fold'" text-16px />
       </div>
       <Breadcrumb />
     </div>

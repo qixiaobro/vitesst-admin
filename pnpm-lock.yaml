@@ -3,6 +3,8 @@ lockfileVersion: 5.4
 specifiers:
   '@antfu/eslint-config': ^0.25.2
   '@element-plus/icons-vue': ^2.0.6
+  '@iconify-json/ep': ^1.1.5
+  '@iconify-json/zondicons': ^1.1.2
   '@iconify/json': ^2.1.70
   '@iconify/vue': ^3.2.1
   '@types/node': ^18.0.0
@@ -33,6 +35,7 @@ specifiers:
 
 dependencies:
   '@element-plus/icons-vue': 2.0.6_vue@3.2.37
+  '@iconify/json': 2.1.70
   '@vueuse/core': 8.7.5_vue@3.2.37
   axios: 0.27.2
   element-plus: 2.2.6_vue@3.2.37
@@ -45,7 +48,8 @@ dependencies:
 
 devDependencies:
   '@antfu/eslint-config': 0.25.2_b5e7v2qnwxfo6hmiq56u52mz3e
-  '@iconify/json': 2.1.70
+  '@iconify-json/ep': 1.1.5
+  '@iconify-json/zondicons': 1.1.2
   '@iconify/vue': 3.2.1_vue@3.2.37
   '@types/node': 18.0.0
   '@unocss/reset': 0.42.0
@@ -267,16 +271,27 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
+  /@iconify-json/ep/1.1.5:
+    resolution: {integrity: sha512-1jkJ8Iyv58LsA7eFS0YxSmVu87DNk0IcTtx62VZPeH6iOpz//Du0m5rew8uCRcYb8Ew2vtj5hxBfAt3MJ33Qbg==}
+    dependencies:
+      '@iconify/types': 1.1.0
+    dev: true
+
+  /@iconify-json/zondicons/1.1.2:
+    resolution: {integrity: sha512-AbEeMP3uEFSj0tRM9cjLyUxNhadyte4/yfDh1AbzGgOyfPauQbH1IkhxQScmiRGKH6g6dd+JQsUGvsSGgTxDcQ==}
+    dependencies:
+      '@iconify/types': 1.1.0
+    dev: true
+
   /@iconify/json/2.1.70:
     resolution: {integrity: sha512-1taHwUJ7Vmy6XjesBgLqCO6Gf486mTkNP4RcmYB/WUMx0/YsjpGES4KMebcoVVsGUBamiyihIO1n/aQwdMb/tA==}
     dependencies:
       '@iconify/types': 1.1.0
       pathe: 0.3.2
-    dev: true
+    dev: false
 
   /@iconify/types/1.1.0:
     resolution: {integrity: sha512-Jh0llaK2LRXQoYsorIH8maClebsnzTcve+7U3rQUSnC11X4jtPnFuyatqFLvMxZ8MLG8dB4zfHsbPfuvxluONw==}
-    dev: true
 
   /@iconify/utils/1.0.33:
     resolution: {integrity: sha512-vGeAqo7aGPxOQmGdVoXFUOuyN+0V7Lcrx2EvaiRjxUD1x6Om0Tvq2bdm7E24l2Pz++4S0mWMCVFXe/17EtKImQ==}
@@ -3112,7 +3127,6 @@ packages:
 
   /pathe/0.3.2:
     resolution: {integrity: sha512-qhnmX0TOqlCvdWWTkoM83wh5J8fZ2yhbDEc9MlsnAEtEc+JCwxUKEwmd6pkY9hRe6JR1Uecbc14VcAKX2yFSTA==}
-    dev: true
 
   /pathval/1.1.1:
     resolution: {integrity: sha512-Dp6zGqpTdETdR63lehJYPeIOqpiNBNtc7BpWSLrOje7UaIsE5aY92r/AunQA7rsXvet3lrJ3JnZX29UPTKXyKQ==}

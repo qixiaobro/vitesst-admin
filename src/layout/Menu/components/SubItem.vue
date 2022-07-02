@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue'
 interface Props {
   menuList: Menu.MenuOptions[] | []
   parentPath?: string

@@ -32,14 +32,16 @@ export default defineConfig({
         'vue-router',
         '@vueuse/core',
         'pinia',
+        {
+          '@iconify/vue': [
+            'Icon',
+          ],
+        },
       ],
       dts: true,
       resolvers: [
         ElementPlusResolver(),
-        // 自动导入图标组件
-        IconsResolver({
-          prefix: 'Icon',
-        })],
+      ],
       dirs: [
         './src/composables',
         './src/api',
@@ -52,15 +54,11 @@ export default defineConfig({
       resolvers: [
         ElementPlusResolver(),
         // 自动注册图标组件
-        IconsResolver({
-          enabledCollections: ['ep'],
-        }),
+        IconsResolver({}),
       ],
     }),
 
-    Icons({
-      autoInstall: true,
-    }),
+    Icons(),
 
     // https://github.com/antfu/unocss
     // see unocss.config.ts for config
