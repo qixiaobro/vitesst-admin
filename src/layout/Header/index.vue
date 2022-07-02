@@ -14,17 +14,17 @@ const logout = () => {
     cancelButtonText: 'Cancel',
     type: 'warning',
   }).then(() => {
-    // sessionStorage.clear()
     sessionStorage.removeItem('token')
     sessionStorage.removeItem('role')
+    sessionStorage.removeItem('tabsMenuValue')
+    sessionStorage.removeItem('tabsMenuList')
+    tabStore.$reset()
+    menuStore.$reset()
     ElMessage({
       type: 'success',
       message: '退出登录成功！',
     })
     router.push('/login')
-    // tabStore.$reset()
-    // menuStore.$reset()
-    // window.location.reload()
   })
 }
 </script>

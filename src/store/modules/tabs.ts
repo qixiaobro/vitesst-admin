@@ -13,7 +13,11 @@ export const UseTabsStore = defineStore({
     // Add Tabs
     async addTabs(tabItem: Menu.TabOptions) {
       // not add tabs black list
-
+      // 如果缓存里有tabsMenuValue 和 tabsMenuList，设置到tabStore
+      if (sessionStorage.getItem('tabsMenuValue') && sessionStorage.getItem('tabsMenuList')) {
+        this.tabsMenuValue = sessionStorage.getItem('tabsMenuValue')!
+        this.tabsMenuList = JSON.parse(sessionStorage.getItem('tabsMenuList')!)
+      }
       if (TABS_BLACK_LIST.includes(tabItem.path))
         return
       // 同一个路由，但是query参数不一样，需要关闭之前的tab
@@ -27,6 +31,7 @@ export const UseTabsStore = defineStore({
         this.tabsMenuList.push(tabItem)
 
       this.setTabsMenuValue(tabItem.fullPath)
+      this.saveTabsMenuValueAndList()
     },
     // Remove Tabs
     async removeTabs(tabPath: string) {
@@ -45,6 +50,7 @@ export const UseTabsStore = defineStore({
       }
       this.tabsMenuValue = tabsMenuValue
       this.tabsMenuList = tabsMenuList.filter(item => item.fullPath !== tabPath)
+      this.saveTabsMenuValueAndList()
     },
     // Change Tabs
     async changeTabs(tabItem: TabPaneProps) {
@@ -52,35 +58,39 @@ export const UseTabsStore = defineStore({
         if (item.title === tabItem.label)
           router.push(item.fullPath)
       })
+
+      this.saveTabsMenuValueAndList()
     },
     // Set TabsMenuValue
     async setTabsMenuValue(tabsMenuValue: string) {
       this.tabsMenuValue = tabsMenuValue
+
+      this.saveTabsMenuValueAndList()
     },
     // Set TabsMenuList
     async setTabsMenuList(tabsMenuList: Menu.TabOptions[]) {
       this.tabsMenuList = tabsMenuList
+
+      this.saveTabsMenuValueAndList()
     },
     // Close MultipleTab
     async closeMultipleTab(tabsMenuValue?: string) {
       this.tabsMenuList = this.tabsMenuList.filter((item) => {
         return item.fullPath === tabsMenuValue || item.fullPath === HOME_URL
       })
+
+      this.saveTabsMenuValueAndList()
+    },
+    // 保存tabsMenuValue 和 tabsMenuList到sessionStorage
+    async saveTabsMenuValueAndList() {
+      sessionStorage.setItem('tabsMenuValue', this.tabsMenuValue)
+      sessionStorage.setItem('tabsMenuList', JSON.stringify(this.tabsMenuList))
     },
     // Go Home
     async goHome() {
       router.push(HOME_URL)
       this.tabsMenuValue = HOME_URL
+      this.saveTabsMenuValueAndList()
     },
-  },
-  persist: {
-    enabled: true,
-    strategies: [
-      {
-        key: 'TabsState',
-        storage: sessionStorage,
-        paths: ['tabsMenuValue', 'tabsMenuList'],
-      },
-    ],
   },
 })

@@ -1,4 +1,3 @@
-import piniaPersist from 'pinia-plugin-persist'
 import App from './App.vue'
 
 // import '@unocss/reset/normalize.css'
@@ -9,7 +8,6 @@ import 'uno.css'
 import 'element-plus/theme-chalk/src/message.scss'
 
 const pinia = createPinia()
-pinia.use(piniaPersist)
 
 const app = createApp(App)
 

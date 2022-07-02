@@ -2,13 +2,10 @@
 import Menu from './Menu/index.vue'
 import Header from './Header/index.vue'
 import Tabs from './Tabs/index.vue'
-// onMounted(()=>{
-//   //从sessionStorage中获取MenuState，设置给menuList
-//   const menuState = sessionStorage.getItem('menuState')
-//   if(menuState){
-//     menuStore.setMenuState(JSON.parse(menuState))
-//   }
-// })
+const menuStore = UseMenuStore()
+onMounted(() => {
+  menuStore.asyncGenerateMenu()
+})
 </script>
 
 <template>

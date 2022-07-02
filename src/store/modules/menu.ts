@@ -14,15 +14,9 @@ export const UseMenuStore = defineStore({
     setMenuList(menuList: Menu.MenuOptions[]) {
       this.menuList = menuList
     },
-  },
-  persist: {
-    enabled: true,
-    strategies: [
-      {
-        key: 'MenuState',
-        storage: sessionStorage,
-        paths: ['isCollapse', 'menuList'],
-      },
-    ],
+    asyncGenerateMenu() {
+      const menuList: Menu.MenuOptions[] = generateMenu(routes)
+      this.menuList = menuList
+    },
   },
 })
