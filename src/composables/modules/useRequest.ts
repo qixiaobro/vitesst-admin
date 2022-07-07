@@ -1,5 +1,6 @@
 import type { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import axios from 'axios'
+import { router } from '~/router'
 
 declare interface codeMessageMapTypes {
   400: string
@@ -62,6 +63,10 @@ axiosInstance.interceptors.response.use(
       }
       else {
         ElMessage.error(response.data.msg || response.data.message)
+        if (response.data.status === 410000) {
+          sessionStorage.removeItem('token')
+          router.push({ path: '/login' })
+        }
         return Promise.reject(response.data)
       }
     }
