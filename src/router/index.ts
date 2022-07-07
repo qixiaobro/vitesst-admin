@@ -221,6 +221,11 @@ const generateMenu = (routers: RouteRecordRaw[]) => {
         if (router.children[0].meta?.hide) { // 如果子路由有hide属性，则不生成
           continue
         }
+
+        const child = router.children[0]
+        if (child.meta && child.meta.permissions && !hasPermission(child.meta.permissions, role))
+          continue
+
         menu.push({
           meta: router.children[0].meta,
           name: router.children[0].name || '',
