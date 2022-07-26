@@ -1,10 +1,10 @@
 
 <h5 align='center'>
 <b>基于 <a href="https://github.com/antfu/vitesse">Vitesse-lite</a> 封装的起手式模版（Element Plus、Axios、Pinia）</b>
+简洁，没有像别的admin一样有很多冗余的东西，只提供了，layout布局、登录、权限、菜单生成，后台系统基础的功能。能够立马创建项目，不用看那么多别的文档、教程。
 </h5>
 
 ## 特性
-- 简介，没有像别的admin一样有很多冗余的东西，只提供了，layout布局、登录、权限、菜单生成
 
 - ⚡️ [Vue 3](https://github.com/vuejs/vue-next), [Vite 2](https://github.com/vitejs/vite), [pnpm](https://pnpm.js.org/), [ESBuild](https://github.com/evanw/esbuild) - 就是快！
 
