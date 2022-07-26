@@ -1,7 +1,6 @@
 <script lang="ts" setup name="clientList">
 import EditClient from './components/EditClient.vue'
-import type Recharge from './components/Recharge.vue'
-import RechargeVue from './components/Recharge.vue'
+import Recharge from './components/Recharge.vue'
 
 const { useTimeStampToDate } = useTimeFormat()
 
@@ -118,7 +117,6 @@ const getClientCountData = async () => {
     todayNewMoney.value = data[3].count
   }
   catch (e: any) {
-    ElMessage.error(e.msg || e.message || '获取统计数据失败')
   }
 }
 
@@ -219,7 +217,7 @@ onActivated(() => {
   />
 
   <!-- 充值弹窗 -->
-  <RechargeVue ref="rechargeRef" @submit="getTableList" />
+  <Recharge ref="rechargeRef" @submit="getTableList" />
 </template>
 
 <style lang="scss" scoped>

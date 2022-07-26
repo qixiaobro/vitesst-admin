@@ -105,7 +105,7 @@ export default defineConfig({
     // 代理
     proxy: {
       '/adminapi': {
-        target: 'https://devlmcs.dp123.com/',
+        target: 'https://www.fastmock.site/mock/03c0cd4a88642982bce678efaa50e438/',
         changeOrigin: true,
         // rewrite: path => path.replace('/api/', '/'),
       },

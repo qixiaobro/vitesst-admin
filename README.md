@@ -4,6 +4,7 @@
 </h5>
 
 ## 特性
+- 简介，没有像别的admin一样有很多冗余的东西，只提供了，layout布局、登录、权限、菜单生成
 
 - ⚡️ [Vue 3](https://github.com/vuejs/vue-next), [Vite 2](https://github.com/vitejs/vite), [pnpm](https://pnpm.js.org/), [ESBuild](https://github.com/evanw/esbuild) - 就是快！
 
