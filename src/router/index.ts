@@ -26,7 +26,7 @@ const routes: RouteRecordRaw[] = [
           keepAlive: true,
           requiresAuth: true,
           title: '首页',
-          icon: 'carbon:box-small',
+          icon: 'carbon:home',
         },
       },
     ],
@@ -51,7 +51,7 @@ const routes: RouteRecordRaw[] = [
           requiresAuth: true,
           title: '客户列表',
           permissions: ['admin'],
-          icon: 'carbon:box-small',
+          icon: 'carbon:user',
         },
       },
       {
@@ -61,7 +61,7 @@ const routes: RouteRecordRaw[] = [
           requiresAuth: true,
           title: '余额变动记录',
           hide: true,
-          icon: 'carbon:box-small',
+          icon: 'carbon:money',
         },
       },
     ],
@@ -71,7 +71,7 @@ const routes: RouteRecordRaw[] = [
     component: Layout,
     meta: {
       title: '订单管理',
-      icon: 'carbon:box-small',
+      icon: 'carbon:menu',
     },
     children: [
       {
@@ -82,7 +82,7 @@ const routes: RouteRecordRaw[] = [
           requiresAuth: true,
           title: '订单列表',
           permissions: ['admin'],
-          icon: 'carbon:box-small',
+          icon: 'carbon:book',
         },
       },
       {

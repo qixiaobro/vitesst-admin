@@ -12,14 +12,4 @@ export const UseUserStore = defineStore({
   actions: {
 
   },
-  persist: {
-    enabled: true,
-    strategies: [
-      {
-        key: 'UserState',
-        storage: sessionStorage,
-        paths: ['id', 'account', 'head_pic', 'roles'],
-      },
-    ],
-  },
 })

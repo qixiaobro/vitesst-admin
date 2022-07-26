@@ -9,7 +9,7 @@ const loginFormRef = ref<FormInstance>()
 const loginRules = reactive<FormRules>({
   account: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
   pwd: [{ required: true, message: '请输入密码', trigger: 'blur' }],
-  imgCode: [{ required: true, message: '请输入图像验证码', trigger: 'blur' }],
+  // imgCode: [{ required: true, message: '请输入图像验证码', trigger: 'blur' }],
 })
 
 // 登录表单数据
@@ -30,7 +30,7 @@ const getCaptcha = async () => {
 }
 
 onMounted(() => {
-  getCaptcha()
+  // getCaptcha()
 })
 
 const loading = ref(false)
@@ -45,7 +45,7 @@ const handleLogin = (formEl: FormInstance | undefined) => {
       const { data } = await userLoginApi({
         account: loginForm.account,
         pwd: loginForm.pwd,
-        imgCode: loginForm.imgCode,
+        // imgCode: loginForm.imgCode,
       })
       sessionStorage.setItem('token', data.token)
       sessionStorage.setItem('role', JSON.stringify(['admin']))
@@ -56,7 +56,7 @@ const handleLogin = (formEl: FormInstance | undefined) => {
     catch {
       loading.value = false
       loginForm.imgCode = ''
-      getCaptcha()
+      // getCaptcha()
     }
   })
 }
@@ -86,7 +86,7 @@ const handleLogin = (formEl: FormInstance | undefined) => {
                   </template>
                 </el-input>
               </el-form-item>
-              <el-form-item prop="imgCode">
+              <!-- <el-form-item prop="imgCode">
                 <el-input v-model="loginForm.imgCode" placeholder="图形验证码" style="width:218px" @keyup.enter="handleLogin(loginFormRef)">
                   <template #prefix>
                     <i-ep:picture />
@@ -96,7 +96,7 @@ const handleLogin = (formEl: FormInstance | undefined) => {
                   <i-ep:loading v-if="imgLoading" class="is-loading el-icon color-[#409EFF] " />
                   <img v-else cursor-pointer :src="captcha" style="width: 100px; height: 38px" @click="getCaptcha">
                 </div>
-              </el-form-item>
+              </el-form-item> -->
             </el-form>
             <el-button
               w-320px mt-6 rounded size="large" type="primary" :loading="loading"
