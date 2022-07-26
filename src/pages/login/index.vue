@@ -104,6 +104,9 @@ const handleLogin = (formEl: FormInstance | undefined) => {
             >
               登录
             </el-button>
+            <div mt-2 text-sm>
+              账号、密码随便填
+            </div>
           </div>
         </div>
       </div>
