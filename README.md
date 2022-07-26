@@ -1,8 +1,8 @@
 
 <h5 align='center'>
-<b>基于 <a href="https://github.com/antfu/vitesse">Vitesse-lite</a> 封装的起手式模版（Element Plus、Axios、Pinia）</b>
+<h3 align='center'>基于 <a href="https://github.com/antfu/vitesse">Vitesse-lite</a> 封装的起手式模版（Element Plus、Axios、Pinia）</h3>
 <br/>
-<p>简洁，没有像别的admin一样有很多冗余的东西，只提供了，layout布局、登录、权限、菜单生成，后台系统基础的功能。能够立马创建项目，不用看那么多别的文档、教程。</p>
+<h4 align='center'>简洁，没有像别的admin一样有很多冗余的东西，只提供了，layout布局、登录、权限、菜单生成，后台系统基础的功能。能够立马创建项目，不用看那么多别的文档、教程。</h4>
 </h5>
 
 ## 特性
