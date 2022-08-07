@@ -42,3 +42,6 @@
 - [`unplugin-auto-import`](https://github.com/antfu/unplugin-auto-import) - 直接使用 Composition API 等，无需导入
 - [`unplugin-vue-components`](https://github.com/antfu/unplugin-vue-components) - 自动加载组件
 - [VueUse](https://github.com/antfu/vueuse) - 实用的 Composition API 工具合集
+
+## 感谢
+项目模版基于[antfu](https://github.com/antfu)的[Vitesse-lite](https://github.com/antfu/vitesse-lite)开发，并且其中大量使用了他开发的插件、工具库等等。他是一个令人倾佩的偶像！
